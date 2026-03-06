@@ -13,7 +13,7 @@ const features = [
     description:
       "Every tattoo is created from scratch, inspired by your personal story and energy. No flash. No templates. Fully custom creation.",
     imagePosition: "left",
-    image: "https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=800&auto=format&fit=crop",
+    image: "/custom-tattoo-design.jpg",
   },
   {
     icon: Eye,
@@ -22,7 +22,7 @@ const features = [
     description:
       "Details, contrast, and textures that turn skin into living art. Influenced by European realism masters.",
     imagePosition: "right",
-    image: "https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?q=80&w=800&auto=format&fit=crop",
+    image: "/hyperrealistic-portrait-tattoo.jpg",
   },
   {
     icon: User,
@@ -31,7 +31,7 @@ const features = [
     description:
       "Direct communication with you—no middlemen. A clear, professional process from consultation to aftercare.",
     imagePosition: "left",
-    image: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=800&auto=format&fit=crop",
+    image: "/black-and-grey-realism-tattoo.jpg",
   },
   {
     icon: Layers,
@@ -40,7 +40,7 @@ const features = [
     description:
       "Each piece adapts to your body's movement and shape for complete visual harmony. Art that flows with you.",
     imagePosition: "right",
-    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop",
+    image: "/full-sleeve-tattoo-realism.jpg",
   },
   {
     icon: Crown,
@@ -49,7 +49,7 @@ const features = [
     description:
       "Sessions designed to connect, inspire, and experience art with calm and respect. Luxury studio environment.",
     imagePosition: "left",
-    image: "https://images.unsplash.com/photo-1605963952402-ddc3501a4e1d?q=80&w=800&auto=format&fit=crop",
+    image: "/portrait-tattoo-detail.jpg",
   },
 ]
 

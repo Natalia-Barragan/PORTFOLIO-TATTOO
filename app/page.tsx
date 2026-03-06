@@ -24,7 +24,7 @@ export default function Home() {
       </section>
       <TrustBar />
       <ValueProposition />
-      <FeaturesShowcase />
+      {/* <FeaturesShowcase /> */}
       <section id="portfolio">
         <PortfolioGallery />
       </section>
