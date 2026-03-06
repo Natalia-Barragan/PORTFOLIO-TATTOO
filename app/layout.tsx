@@ -23,15 +23,9 @@ export const metadata: Metadata = {
   title: "INK STUDIO | Custom Art",
   description:
     "Tattoo studio specialized in custom designs and precision art. Premium experience in realistic tattoos and unique body art.",
-  icons: {
-    icon: "/logo/logo.icon.png",
-    shortcut: "/logo/logo.icon.png",
-    apple: "/logo/logo.icon.png",
-  },
   openGraph: {
     title: "INK STUDIO | Tattoo Studio",
     description: "Custom designs and precision art. Book your exclusive consultation.",
-    images: [],
   },
   generator: "v0.app",
 }

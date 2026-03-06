@@ -8,7 +8,7 @@ import { X, Trophy } from "lucide-react"
 const portfolioItems = [
   {
     id: 1,
-    image: "https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?q=80&w=800&auto=format&fit=crop",
+    image: "/hyperrealistic-portrait-tattoo.jpg",
     title: "Hyper-Realistic Portrait",
     category: "Portrait",
     year: 2024,
@@ -17,7 +17,7 @@ const portfolioItems = [
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?q=80&w=800&auto=format&fit=crop",
+    image: "/black-and-grey-realism-tattoo.jpg",
     title: "Black and Grey Masterpiece",
     category: "Realism",
     year: 2024,
@@ -25,7 +25,7 @@ const portfolioItems = [
   },
   {
     id: 3,
-    image: "https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?q=80&w=800&auto=format&fit=crop",
+    image: "/full-sleeve-tattoo-realism.jpg",
     title: "Full Sleeve Composition",
     category: "Full Sleeve",
     year: 2023,
@@ -34,7 +34,7 @@ const portfolioItems = [
   },
   {
     id: 4,
-    image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=800&auto=format&fit=crop",
+    image: "/realistic-animal-tattoo.jpg",
     title: "Wildlife Realism",
     category: "Realism",
     year: 2024,
@@ -42,7 +42,7 @@ const portfolioItems = [
   },
   {
     id: 5,
-    image: "https://images.unsplash.com/photo-1605963952402-ddc3501a4e1d?q=80&w=800&auto=format&fit=crop",
+    image: "/portrait-tattoo-detail.jpg",
     title: "Emotional Portrait",
     category: "Portrait",
     year: 2023,
@@ -50,7 +50,7 @@ const portfolioItems = [
   },
   {
     id: 6,
-    image: "https://images.unsplash.com/photo-1522864692735-86f3453b3b4f?q=80&w=800&auto=format&fit=crop",
+    image: "/custom-tattoo-design.jpg",
     title: "Custom Creation",
     category: "Custom",
     year: 2024,
