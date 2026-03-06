@@ -1,0 +1,101 @@
+📧 Documentación de Implementación: Sistema de Reservas y Notificaciones
+
+
+1. Resumen General
+
+Se implementó un sistema de notificaciones automáticas por correo electrónico utilizando Resend.
+
+Cuando un cliente completa el formulario de reserva ("Book Now"), el sistema dispara una doble notificación:
+
+Al Cliente: Un correo de confirmación con branding del estudio y resumen de su solicitud.
+
+Al Tatuador (Admin): Un correo de alerta ("🔥 NEW LEAD") con los datos de contacto del cliente (teléfono, email) y la imagen de referencia adjunta para una rápida gestión.
+
+2. Arquitectura de la Solución
+
+El flujo de datos se diseñó para soportar el envío de archivos adjuntos y la comunicación bidireccional sin depender (por ahora) de bases de datos externas.
+
+Frontend: El formulario captura los datos y la imagen. Se utiliza FormData para empaquetar la información y enviarla al servidor, permitiendo el transporte de archivos binarios.
+
+Backend (Next.js API): Una ruta de API recibe el FormData. Realiza una validación estricta de todos los campos y procesa la imagen en memoria (Buffer).
+
+Email Service (Resend): Se utiliza Promise.all para enviar dos correos simultáneamente, utilizando una única plantilla React reutilizable que adapta su contenido dinámicamente según el destinatario.
+
+3. Archivos Modificados y Creados
+
+A. Backend (app/api/save-lead/route.tsx)
+
+Estado: Modificado.
+
+Cambio de extensión: Se renombró de .ts a .tsx para soportar sintaxis JSX.
+
+Lógica Implementada:
+
+Detección de Content-Type: Soporte híbrido para multipart/form-data (archivos) y application/json.
+
+Procesamiento de Imagen: Conversión de File a Buffer para adjuntar la referencia directamente en el correo.
+
+Validación Estricta: Se verifica la existencia de todos los campos requeridos (name, email, phone, vision, size, date, terms).
+
+Doble Envío: Se configura el envío paralelo al ARTIST_EMAIL y al email del cliente.
+
+B. Plantilla de Email (templates-emails/booking-email.tsx)
+
+Estado: Nuevo.
+
+Tecnología: React Email + Tailwind CSS.
+
+Descripción: Plantilla con estética "Dark Mode".
+
+Lógica Dinámica: Se añadió la prop type ('artist' | 'client').
+
+Modo Artista: Muestra bloque de "Datos de Contacto", saludo al equipo y asunto de alerta.
+
+Modo Cliente: Muestra agradecimiento, confirmación de recepción y oculta datos internos.
+
+C. Frontend (components/TypeformBooking.tsx)
+
+Estado: Modificado.
+
+Función afectada: handleSubmit.
+
+Cambio Crítico: Migración de JSON a FormData.
+
+Antes: Solo enviaba texto.
+
+Ahora: Empaqueta texto y el archivo binario (uploadedFiles[0]) en un objeto FormData para que el backend pueda procesar la imagen.
+
+4. Configuración de Entorno (.env)
+
+Para que el sistema funcione, se requieren las siguientes variables de entorno en el servidor (Vercel):
+
+# Clave privada de la API de Resend
+RESEND_API_KEY=re_123456...
+
+# Remitente verificado en el panel de Resend
+RESEND_FROM_EMAIL=reservas@victormane.com
+
+# Correo donde llegarán las alertas de nuevos clientes
+ARTIST_EMAIL=tu_email_personal@gmail.com
+
+
+Nota de Seguridad: Estas claves nunca deben exponerse en el cliente (no deben llevar el prefijo NEXT_PUBLIC_).
+
+5. Limitaciones y Consideraciones Actuales
+
+Imágenes como Adjuntos
+
+Actualmente, las imágenes de referencia se envían como archivos adjuntos descargables y no incrustadas visualmente en el cuerpo del mensaje.
+
+Futura Mejora: Integrar ImageKit para obtener una URL pública y mostrar la foto dentro del diseño HTML.
+
+Verificación de Dominio 
+
+Mientras el dominio no esté verificado mediante DNS en Resend:
+
+El sistema solo enviará correos a la dirección de email registrada como dueña de la cuenta.
+
+Una vez verificado el dominio en Resend, actualizar el campo to: en el backend para que apunte al email real del artista, si es diferente al del registro.
+
+
+
