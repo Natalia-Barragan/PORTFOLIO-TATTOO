@@ -62,7 +62,7 @@ export default function MagneticButton({ children, href, onClick, className = ""
         transition={{ type: "spring", stiffness: 150, damping: 15 }}
         whileHover={{
           scale: 1.05,
-          boxShadow: "0 0 60px rgba(255,140,66,0.6)",
+          boxShadow: "0 0 60px rgba(0,68,255,0.6)",
         }}
         whileTap={{ scale: 0.98 }}
         className={buttonClasses}
@@ -82,7 +82,7 @@ export default function MagneticButton({ children, href, onClick, className = ""
       transition={{ type: "spring", stiffness: 150, damping: 15 }}
       whileHover={{
         scale: 1.05,
-        boxShadow: "0 0 60px rgba(255,140,66,0.6)",
+        boxShadow: "0 0 60px rgba(0,68,255,0.6)",
       }}
       whileTap={{ scale: 0.98 }}
       className={buttonClasses}

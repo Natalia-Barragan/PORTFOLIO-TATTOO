@@ -113,20 +113,18 @@ export default function HeroSection() {
             },
           }}
         >
-          <MagneticButton href="/booking">
-            <div className="flex items-center gap-2 text-black bg-[#0044FF] px-8 py-4 rounded-sm glow-accent font-semibold hover:bg-white hover:text-black transition-colors">
-              <Calendar className="w-5 h-5" />
-              Book Now
-            </div>
+          <MagneticButton href="/booking" className="gap-2 px-8 py-4 rounded-sm glow-accent hover:bg-white transition-colors duration-300">
+            <Calendar className="w-5 h-5" />
+            Book Now
           </MagneticButton>
 
-          <a
+          {/* <a
             href="/booking"
             className="text-[#0044FF] hover:text-white transition-colors duration-300 flex items-center gap-2 text-lg group"
           >
             <span className="border-b border-[#0044FF] group-hover:border-white transition-colors">Schedule Consultation</span>
             <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </a>
+          </a> */}
         </motion.div>
 
         {/* Trust Indicators */}

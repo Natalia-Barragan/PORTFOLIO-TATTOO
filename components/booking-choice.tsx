@@ -11,7 +11,7 @@ interface BookingChoiceProps {
 
 export default function BookingChoice({ onSelectQuick, onSelectFull }: BookingChoiceProps) {
   return (
-    <section id="consultation" className="relative bg-linear-to-br from-black via-[#1A1A1A] to-[#2A1810] py-40">
+    <section id="consultation" className="relative bg-linear-to-br from-black via-[#1A1A1A] to-[#0A0D1A] py-40">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <motion.div
           className="text-center mb-16"
@@ -70,7 +70,7 @@ export default function BookingChoice({ onSelectQuick, onSelectFull }: BookingCh
 
           {/* Ready to Book */}
           <motion.div
-            className="bg-linear-to-br from-[#1A1A1A] to-[#2A1810] border border-[#0044FF]/40 rounded-sm p-8 md:p-10 hover:border-[#0044FF] transition-all duration-300 relative overflow-hidden"
+            className="bg-linear-to-br from-[#1A1A1A] to-[#0A0D1A] border border-[#0044FF]/40 rounded-sm p-8 md:p-10 hover:border-[#0044FF] transition-all duration-300 relative overflow-hidden"
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -105,7 +105,7 @@ export default function BookingChoice({ onSelectQuick, onSelectFull }: BookingCh
 
             <Button
               onClick={onSelectFull}
-              className="w-full bg-[#0044FF] hover:shadow-[0_0_60px_rgba(255,140,66,0.6)] text-black font-semibold py-6 text-lg transition-all duration-500"
+              className="w-full bg-[#0044FF] hover:shadow-[0_0_60px_rgba(0,68,255,0.6)] text-black font-semibold py-6 text-lg transition-all duration-500"
             >
               Comenzar Proceso de Reserva
             </Button>

@@ -199,7 +199,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
 
   if (submitted) {
     return (
-      <section className="relative bg-linear-to-br from-black via-[#1A1A1A] to-[#2A1810] py-40 min-h-screen flex items-center">
+      <section className="relative bg-linear-to-br from-black via-[#1A1A1A] to-[#0A0D1A] py-40 min-h-screen flex items-center">
         <div className="max-w-2xl mx-auto px-6 text-center">
           <motion.div
             initial={{ scale: 0 }}
@@ -230,7 +230,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
   }
 
   return (
-    <section className="relative bg-linear-to-br from-black via-[#1A1A1A] to-[#2A1810] py-20 min-h-screen">
+    <section className="relative bg-linear-to-br from-black via-[#1A1A1A] to-[#0A0D1A] py-20 min-h-screen">
       <div className="max-w-3xl mx-auto px-6">
         {/* barra de progreso */}
         <div className="mb-12">
@@ -523,7 +523,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
               <Button
                 onClick={handleNext}
                 disabled={isUploading}
-                className="flex-1 bg-linear-to-r from-[#0044FF] to-[#0044FF] hover:shadow-[0_0_60px_rgba(255,140,66,0.6)] text-black font-semibold py-6 text-lg transition-all duration-500 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="flex-1 bg-linear-to-r from-[#0044FF] to-[#0044FF] hover:shadow-[0_0_60px_rgba(0,68,255,0.6)] text-black font-semibold py-6 text-lg transition-all duration-500 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isUploading ? (
                   "Uploading..."

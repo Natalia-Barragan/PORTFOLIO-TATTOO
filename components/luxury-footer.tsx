@@ -42,7 +42,7 @@ export default function LuxuryFooter() {
               </a>
               <div className="flex items-center gap-3 text-[#D1D5DB]">
                 <MapPin className="w-5 h-5" />
-                Premium Studio
+                CABA, Argentina
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function LuxuryFooter() {
             <h4 className="font-heading text-xl text-white mb-6 font-light">Location</h4>
             <div className="w-full h-48 rounded-sm overflow-hidden border border-[#0044FF]/20">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105073.443670053!2d-58.5033383!3d-34.6156624!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca3b4ef90cbd%3A0xa0b3812e88e88e87!2sBuenos%20Aires%2C%20CABA!5e0!3m2!1sen!2sar!4v1715000000000!5m2!1sen!2sar"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
@@ -71,12 +71,12 @@ export default function LuxuryFooter() {
             © 2025 Tattoo Studio.
             <span className="mx-1">Made by</span>
             <a
-              href={`https://protoly.lat/en`}
+              href={`https://nbdigital.lat`}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#0044FF] transition-colors"
             >
-              Protoly.lat/en
+              NB DIGITAL
             </a>.
           </p>
           <div className="flex gap-6">

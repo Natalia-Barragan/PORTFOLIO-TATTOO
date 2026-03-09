@@ -22,7 +22,7 @@ export default function FinalCTA() {
   }
 
   return (
-    <section id="consultation" className="relative bg-linear-to-br from-black via-[#1A1A1A] to-[#2A1810] py-40">
+    <section id="consultation" className="relative bg-linear-to-br from-black via-[#1A1A1A] to-[#0A0D1A] py-40">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <motion.div
           className="text-center mb-16"
@@ -162,7 +162,7 @@ export default function FinalCTA() {
             <Button
               type="submit"
               disabled={submitted}
-              className="w-full bg-linear-to-r from-[#0044FF] to-[#0044FF] hover:shadow-[0_0_60px_rgba(255,140,66,0.6)] text-black font-semibold py-6 text-lg transition-all duration-500"
+              className="w-full bg-linear-to-r from-[#0044FF] to-[#0044FF] hover:shadow-[0_0_60px_rgba(0,68,255,0.6)] text-black font-semibold py-6 text-lg transition-all duration-500"
             >
               {submitted ? (
                 <>

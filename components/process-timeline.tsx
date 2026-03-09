@@ -61,7 +61,7 @@ export default function ProcessTimeline() {
                 >
                   <div className="flex flex-col items-center text-center">
                     {/* Icon circle */}
-                    <div className="relative z-10 w-20 h-20 rounded-full bg-[#0044FF] flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(255,140,66,0.4)]">
+                    <div className="relative z-10 w-20 h-20 rounded-full bg-[#0044FF] flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(0,68,255,0.4)]">
                       <Icon className="w-10 h-10 text-black" />
                     </div>
 

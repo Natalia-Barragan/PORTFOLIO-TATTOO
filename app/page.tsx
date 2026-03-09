@@ -37,7 +37,7 @@ export default function Home() {
       </section>
       <BookingWrapper />
       <LuxuryFooter />
-      <Widget />
+      {/* <Widget /> */}
     </main>
   )
 }

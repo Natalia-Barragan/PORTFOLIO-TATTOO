@@ -196,11 +196,10 @@ const StepSize = ({ value, onChange }: { value: string; onChange: (v: string) =>
         <button
           key={size}
           onClick={() => onChange(size)}
-          className={`py-3 px-4 rounded-lg font-medium transition-all ${
-            value === size
+          className={`py-3 px-4 rounded-lg font-medium transition-all ${value === size
               ? "bg-[#0044FF] text-black border-[#0044FF]"
               : "bg-gray-900 text-gray-300 border border-gray-700 hover:border-[#0044FF]"
-          }`}
+            }`}
         >
           {size}
         </button>
@@ -443,13 +442,12 @@ export default function TattooBooking() {
           {STEPS.map((step, index) => (
             <div key={step.id} className="flex flex-col items-center flex-1">
               <motion.div
-                className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${
-                  currentStep > step.id
+                className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${currentStep > step.id
                     ? "bg-[#0044FF] text-black"
                     : currentStep === step.id
                       ? "bg-[#0044FF] text-black ring-2 ring-[#0044FF]"
                       : "bg-gray-800 text-gray-500"
-                }`}
+                  }`}
                 animate={{
                   scale: currentStep === step.id ? 1.1 : 1,
                 }}
@@ -514,11 +512,10 @@ export default function TattooBooking() {
                 disabled={currentStep === 1}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
-                  currentStep === 1
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${currentStep === 1
                     ? "bg-gray-800 text-gray-500 cursor-not-allowed"
                     : "bg-gray-800 text-white hover:bg-gray-700"
-                }`}
+                  }`}
               >
                 <ChevronLeft className="w-5 h-5" />
                 Atrás
@@ -530,7 +527,7 @@ export default function TattooBooking() {
                   disabled={isLoading}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-[#FFD700] to-[#0044FF] text-black rounded-lg font-medium hover:from-[#0044FF] hover:to-[#FFD700] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[#0044FF] hover:bg-white text-black rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <>
@@ -549,7 +546,7 @@ export default function TattooBooking() {
                   onClick={handleNext}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-linear-to-r from-[#FFD700] to-[#0044FF] text-black rounded-lg font-medium hover:from-[#0044FF] hover:to-[#FFD700] transition-all"
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[#0044FF] hover:bg-white text-black rounded-lg font-medium transition-all"
                 >
                   Siguiente
                   <ChevronRight className="w-5 h-5" />
