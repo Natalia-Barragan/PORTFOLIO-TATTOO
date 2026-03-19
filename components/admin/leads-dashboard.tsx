@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { supabase } from "@/lib/supabase"
 import { format } from "date-fns"
 import { motion, AnimatePresence } from "framer-motion"
@@ -28,11 +29,13 @@ type Lead = {
 }
 
 export default function LeadsDashboard() {
+    const router = useRouter()
     const [leads, setLeads] = useState<Lead[]>([])
     const [loading, setLoading] = useState(true)
-    const [filter, setFilter] = useState("all") // all, new, contacted, booked
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
     const [searchTerm, setSearchTerm] = useState("")
-    const [viewMode, setViewMode] = useState<"grid" | "table" | "calendar">("table")
+    const [filter, setFilter] = useState("all")
+    const [viewMode, setViewMode] = useState<"grid" | "table" | "calendar">("grid")
     const [editingLead, setEditingLead] = useState<string | null>(null)
     const [editingData, setEditingData] = useState<{ 
         date: string, 
@@ -55,8 +58,14 @@ export default function LeadsDashboard() {
     const [notification, setNotification] = useState<{ message: string, type: 'success' | 'error' } | null>(null)
 
     useEffect(() => {
-        fetchLeads()
-    }, [])
+        const token = localStorage.getItem("admin_token")
+        if (token === "authorized_session_2026") {
+            setIsAuthenticated(true)
+            fetchLeads()
+        } else {
+            router.push("/admin/login")
+        }
+    }, [router])
 
     // Helper para parsear la fecha guardada (que puede ser texto libre o ISO)
     const parseLeadDate = (dateStr: string): Date | null => {
@@ -222,6 +231,12 @@ export default function LeadsDashboard() {
         })
         return translated.charAt(0).toUpperCase() + translated.slice(1)
     }
+
+    if (!isAuthenticated) return (
+        <div className="min-h-screen bg-black flex items-center justify-center">
+            <div className="w-10 h-10 border-4 border-metal-plateado border-t-transparent rounded-full animate-spin"></div>
+        </div>
+    )
 
     return (
         <div className="min-h-screen bg-black relative">
