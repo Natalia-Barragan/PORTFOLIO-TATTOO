@@ -50,11 +50,11 @@ export default function AwardsSection() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
               >
-                <Card className="bg-[#2A2A2A] border-[#0044FF]/20 p-10 text-center h-full hover:border-[#0044FF] hover:shadow-[0_0_40px_rgba(0,68,255,0.2)] transition-all duration-500">
-                  <Icon className="w-16 h-16 text-[#0044FF] mx-auto mb-6" />
+                <Card className="bg-[#2A2A2A] border-gray-300/20 p-10 text-center h-full hover:border-gray-300 hover:shadow-[0_0_40px_rgba(192, 192, 192,0.2)] transition-all duration-500">
+                  <Icon className="w-16 h-16 text-metal-plateado mx-auto mb-6" />
                   <h3 className="font-heading text-2xl text-white mb-3 font-light">{award.title}</h3>
                   <p className="text-lg text-[#D1D5DB] mb-2">{award.description}</p>
-                  <p className="text-sm text-[#0044FF]/70">{award.year}</p>
+                  <p className="text-sm text-metal-plateado/70">{award.year}</p>
                 </Card>
               </motion.div>
             )

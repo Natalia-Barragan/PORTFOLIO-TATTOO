@@ -274,7 +274,7 @@ STUDIO_NAME=Victor Mane Tattoo
 
 ```
 Primario:     #dc2626 (Red-600)
-Secundario:   #0044FF (Orange)
+Secundario:   #d1d5db (Orange)
 Fondo:        #000000 (Black)
 Superficie:   #1a1a1a (Gray-950)
 Borde:        #374151 (Gray-700)

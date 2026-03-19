@@ -20,8 +20,7 @@ interface EmailTemplateProps {
   phone: string;
   vision: string;
   size: string;
-  artist: string;
-  budget: string;
+  budget?: string;
   date: string;
   contactMethod: string;
   imageUrl?: string;
@@ -34,7 +33,6 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
   phone,
   vision,
   size,
-  artist,
   budget,
   date,
   contactMethod,
@@ -43,7 +41,7 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
 }) => {
   const isArtist = type === 'artist';
   
-  const brandColor = '#0044FF';
+  const brandColor = '#d1d5db';
 
   const title = isArtist ? "New Booking Request 🚀" : "Booking Received! 🔥";
   const subTitle = isArtist ? "New lead from website" : "Thanks for choosing our Studio";
@@ -131,11 +129,6 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
                   </div>
 
                   {/* Detalles en lista vertical */}
-                  <div>
-                    <Text className="text-gray-500 text-xs uppercase font-bold m-0 mb-1">Artist Preference</Text>
-                    <Text className="text-white text-base m-0">{artist || 'Any available'}</Text>
-                  </div>
-
                   <div>
                     <Text className="text-gray-500 text-xs uppercase font-bold m-0 mb-1">Approximate Size</Text>
                     <Text className="text-white text-base m-0">{size}</Text>

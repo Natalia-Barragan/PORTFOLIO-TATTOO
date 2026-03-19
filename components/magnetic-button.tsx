@@ -30,7 +30,7 @@ export default function MagneticButton({ children, href, onClick, className = ""
     setPosition({ x: 0, y: 0 })
   }
 
-  const buttonClasses = `relative px-12 py-5 bg-[#0044FF] text-black font-semibold text-lg rounded-sm overflow-hidden group inline-flex items-center ${className}`
+  const buttonClasses = `relative px-12 py-5 bg-metal-plateado text-black font-semibold text-lg rounded-sm overflow-hidden group inline-flex items-center ${className}`
 
   const content = (
     <>
@@ -62,7 +62,7 @@ export default function MagneticButton({ children, href, onClick, className = ""
         transition={{ type: "spring", stiffness: 150, damping: 15 }}
         whileHover={{
           scale: 1.05,
-          boxShadow: "0 0 60px rgba(0,68,255,0.6)",
+          boxShadow: "0 0 60px rgba(192, 192, 192,0.6)",
         }}
         whileTap={{ scale: 0.98 }}
         className={buttonClasses}
@@ -82,7 +82,7 @@ export default function MagneticButton({ children, href, onClick, className = ""
       transition={{ type: "spring", stiffness: 150, damping: 15 }}
       whileHover={{
         scale: 1.05,
-        boxShadow: "0 0 60px rgba(0,68,255,0.6)",
+        boxShadow: "0 0 60px rgba(192, 192, 192,0.6)",
       }}
       whileTap={{ scale: 0.98 }}
       className={buttonClasses}

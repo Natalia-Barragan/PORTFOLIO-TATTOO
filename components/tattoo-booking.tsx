@@ -111,7 +111,7 @@ const StepName = ({ value, onChange }: { value: string; onChange: (v: string) =>
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="Juan Pérez"
-      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#0044FF] focus:ring-1 focus:ring-[#0044FF] transition-colors"
+      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-[#d1d5db] transition-colors"
       autoFocus
     />
   </motion.div>
@@ -131,7 +131,7 @@ const StepPhone = ({ value, onChange }: { value: string; onChange: (v: string) =
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="+1 (555) 000-0000"
-      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#0044FF] focus:ring-1 focus:ring-[#0044FF] transition-colors"
+      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-[#d1d5db] transition-colors"
       autoFocus
     />
   </motion.div>
@@ -151,7 +151,7 @@ const StepEmail = ({ value, onChange }: { value: string; onChange: (v: string) =
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="tu@correo.com"
-      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#0044FF] focus:ring-1 focus:ring-[#0044FF] transition-colors"
+      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-[#d1d5db] transition-colors"
       autoFocus
     />
   </motion.div>
@@ -169,7 +169,7 @@ const StepTattooType = ({ value, onChange }: { value: string; onChange: (v: stri
     <select
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-[#0044FF] focus:ring-1 focus:ring-[#0044FF] transition-colors"
+      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-[#d1d5db] transition-colors"
       autoFocus
     >
       <option value="">Selecciona un tipo</option>
@@ -197,8 +197,8 @@ const StepSize = ({ value, onChange }: { value: string; onChange: (v: string) =>
           key={size}
           onClick={() => onChange(size)}
           className={`py-3 px-4 rounded-lg font-medium transition-all ${value === size
-              ? "bg-[#0044FF] text-black border-[#0044FF]"
-              : "bg-gray-900 text-gray-300 border border-gray-700 hover:border-[#0044FF]"
+              ? "bg-metal-plateado text-black border-gray-300"
+              : "bg-gray-900 text-gray-300 border border-gray-700 hover:border-gray-300"
             }`}
         >
           {size}
@@ -222,7 +222,7 @@ const StepBodyArea = ({ value, onChange }: { value: string; onChange: (v: string
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="P.ej: Brazo derecho, Espalda, Pecho..."
-      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#0044FF] focus:ring-1 focus:ring-[#0044FF] transition-colors"
+      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-[#d1d5db] transition-colors"
       autoFocus
     />
   </motion.div>
@@ -242,7 +242,7 @@ const StepMessage = ({ value, onChange }: { value: string; onChange: (v: string)
       onChange={(e) => onChange(e.target.value)}
       placeholder="Describe tu idea de tatuaje, inspiración, estilo, etc..."
       rows={5}
-      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#0044FF] focus:ring-1 focus:ring-[#0044FF] transition-colors resize-none"
+      className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-gray-300 focus:ring-1 focus:ring-[#d1d5db] transition-colors resize-none"
       autoFocus
     />
   </motion.div>
@@ -303,7 +303,7 @@ const SuccessStep = () => (
       animate={{ scale: 1 }}
       transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
     >
-      <CheckCircle className="w-20 h-20 text-[#0044FF]" />
+      <CheckCircle className="w-20 h-20 text-metal-plateado" />
     </motion.div>
     <div className="text-center space-y-2">
       <h3 className="text-2xl text-white font-heading font-light">¡Éxito!</h3>
@@ -425,11 +425,11 @@ export default function TattooBooking() {
             <span className="text-sm font-medium text-gray-400">
               Paso {isSuccess ? STEPS.length + 1 : currentStep} de {STEPS.length + 1}
             </span>
-            <span className="text-sm font-medium text-[#0044FF]">{Math.round(progressPercentage)}%</span>
+            <span className="text-sm font-medium text-metal-plateado">{Math.round(progressPercentage)}%</span>
           </div>
           <div className="w-full h-2 bg-gray-800 rounded-full overflow-hidden">
             <motion.div
-              className="h-full bg-linear-to-r from-[#0044FF] to-[#0044FF]"
+              className="h-full bg-linear-to-r from-gray-300 to-gray-400"
               initial={{ width: 0 }}
               animate={{ width: `${progressPercentage}%` }}
               transition={{ duration: 0.5, ease: "easeOut" }}
@@ -443,9 +443,9 @@ export default function TattooBooking() {
             <div key={step.id} className="flex flex-col items-center flex-1">
               <motion.div
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all ${currentStep > step.id
-                    ? "bg-[#0044FF] text-black"
+                    ? "bg-metal-plateado text-black"
                     : currentStep === step.id
-                      ? "bg-[#0044FF] text-black ring-2 ring-[#0044FF]"
+                      ? "bg-metal-plateado text-black ring-2 ring-[#d1d5db]"
                       : "bg-gray-800 text-gray-500"
                   }`}
                 animate={{
@@ -473,10 +473,10 @@ export default function TattooBooking() {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="mb-6 p-4 bg-[#0044FF]/15 border border-[#0044FF] rounded-lg flex items-center gap-3"
+                className="mb-6 p-4 bg-metal-plateado/15 border border-gray-300 rounded-lg flex items-center gap-3"
               >
-                <AlertCircle className="w-5 h-5 text-[#0044FF] shrink-0" />
-                <span className="text-[#0044FF] text-sm">{error}</span>
+                <AlertCircle className="w-5 h-5 text-metal-plateado shrink-0" />
+                <span className="text-metal-plateado text-sm">{error}</span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -527,7 +527,7 @@ export default function TattooBooking() {
                   disabled={isLoading}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[#0044FF] hover:bg-white text-black rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-metal-plateado hover:bg-white text-black rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (
                     <>
@@ -546,7 +546,7 @@ export default function TattooBooking() {
                   onClick={handleNext}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-[#0044FF] hover:bg-white text-black rounded-lg font-medium transition-all"
+                  className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-metal-plateado hover:bg-white text-black rounded-lg font-medium transition-all"
                 >
                   Siguiente
                   <ChevronRight className="w-5 h-5" />

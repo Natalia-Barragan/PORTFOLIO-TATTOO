@@ -37,7 +37,7 @@ export default function FinalCTA() {
           <p className="text-xl md:text-2xl text-[#D1D5DB] font-light mb-4">
             Disponibilidad limitada. Reserva tu consulta hoy.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-[#0044FF]/70 uppercase tracking-widest">
+          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-metal-plateado/70 uppercase tracking-widest">
             <span>💎 Solo Consultas Premium</span>
             <span className="hidden md:inline">|</span>
             <span>Espacios Limitados Mensuales</span>
@@ -53,9 +53,9 @@ export default function FinalCTA() {
         >
           <form
             onSubmit={handleSubmit}
-            className="bg-[#1A1A1A] border border-[#0044FF]/20 rounded-sm p-8 md:p-12 space-y-6"
+            className="bg-[#1A1A1A] border border-gray-300/20 rounded-sm p-8 md:p-12 space-y-6"
           >
-            <h3 className="font-heading text-3xl text-[#0044FF] mb-8 font-light">Comienza Tu Viaje</h3>
+            <h3 className="font-heading text-3xl text-metal-plateado mb-8 font-light">Comienza Tu Viaje</h3>
 
             <div className="space-y-2">
               <Label htmlFor="name" className="text-white font-heading">
@@ -64,7 +64,7 @@ export default function FinalCTA() {
               <Input
                 id="name"
                 required
-                className="bg-[#2A2A2A] border-[#0044FF]/30 text-white focus:border-[#0044FF]"
+                className="bg-[#2A2A2A] border-gray-300/30 text-white focus:border-gray-300"
               />
             </div>
 
@@ -77,7 +77,7 @@ export default function FinalCTA() {
                   id="email"
                   type="email"
                   required
-                  className="bg-[#2A2A2A] border-[#0044FF]/30 text-white focus:border-[#0044FF]"
+                  className="bg-[#2A2A2A] border-gray-300/30 text-white focus:border-gray-300"
                 />
               </div>
 
@@ -89,7 +89,7 @@ export default function FinalCTA() {
                   id="phone"
                   type="tel"
                   required
-                  className="bg-[#2A2A2A] border-[#0044FF]/30 text-white focus:border-[#0044FF]"
+                  className="bg-[#2A2A2A] border-gray-300/30 text-white focus:border-gray-300"
                 />
               </div>
             </div>
@@ -99,7 +99,7 @@ export default function FinalCTA() {
                 Método de Contacto Preferido
               </Label>
               <Select>
-                <SelectTrigger className="bg-[#2A2A2A] border-[#0044FF]/30 text-white">
+                <SelectTrigger className="bg-[#2A2A2A] border-gray-300/30 text-white">
                   <SelectValue placeholder="Selecciona método" />
                 </SelectTrigger>
                 <SelectContent>
@@ -119,7 +119,7 @@ export default function FinalCTA() {
                 required
                 rows={6}
                 placeholder="Cuéntame sobre el tatuaje que estás imaginando. Incluye tamaño, ubicación, preferencias de estilo y detalles significativos."
-                className="bg-[#2A2A2A] border-[#0044FF]/30 text-white focus:border-[#0044FF] resize-none"
+                className="bg-[#2A2A2A] border-gray-300/30 text-white focus:border-gray-300 resize-none"
               />
             </div>
 
@@ -128,7 +128,7 @@ export default function FinalCTA() {
                 Tamaño Aproximado
               </Label>
               <Select>
-                <SelectTrigger className="bg-[#2A2A2A] border-[#0044FF]/30 text-white">
+                <SelectTrigger className="bg-[#2A2A2A] border-gray-300/30 text-white">
                   <SelectValue placeholder="Selecciona tamaño" />
                 </SelectTrigger>
                 <SelectContent>
@@ -148,12 +148,12 @@ export default function FinalCTA() {
               <Input
                 id="date"
                 placeholder="p.ej., Marzo 2025 o flexible"
-                className="bg-[#2A2A2A] border-[#0044FF]/30 text-white focus:border-[#0044FF]"
+                className="bg-[#2A2A2A] border-gray-300/30 text-white focus:border-gray-300"
               />
             </div>
 
             <div className="flex items-start space-x-3 pt-4">
-              <Checkbox id="terms" required className="border-[#0044FF]/30 data-[state=checked]:bg-[#0044FF]" />
+              <Checkbox id="terms" required className="border-gray-300/30 data-[state=checked]:bg-metal-plateado" />
               <Label htmlFor="terms" className="text-sm text-[#D1D5DB] leading-relaxed cursor-pointer font-heading">
                 Entiendo que esto es una solicitud de consulta y los precios finales se discutirán después de la aprobación del diseño
               </Label>
@@ -162,7 +162,7 @@ export default function FinalCTA() {
             <Button
               type="submit"
               disabled={submitted}
-              className="w-full bg-linear-to-r from-[#0044FF] to-[#0044FF] hover:shadow-[0_0_60px_rgba(0,68,255,0.6)] text-black font-semibold py-6 text-lg transition-all duration-500"
+              className="w-full bg-linear-to-r from-gray-300 to-gray-400 hover:shadow-[0_0_60px_rgba(192, 192, 192,0.6)] text-black font-semibold py-6 text-lg transition-all duration-500"
             >
               {submitted ? (
                 <>

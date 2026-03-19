@@ -61,18 +61,18 @@ export default function ProcessTimeline() {
                 >
                   <div className="flex flex-col items-center text-center">
                     {/* Icon circle */}
-                    <div className="relative z-10 w-20 h-20 rounded-full bg-[#0044FF] flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(0,68,255,0.4)]">
+                    <div className="relative z-10 w-20 h-20 rounded-full bg-metal-plateado flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(192, 192, 192,0.4)]">
                       <Icon className="w-10 h-10 text-black" />
                     </div>
 
                     {/* Step number */}
-                    <div className="text-sm text-[#0044FF] font-semibold mb-3 tracking-widest">STEP {index + 1}</div>
+                    <div className="text-sm text-metal-plateado font-semibold mb-3 tracking-widest">STEP {index + 1}</div>
 
                     <h3 className="font-heading text-2xl text-white mb-4 font-light">{step.title}</h3>
 
                     <p className="text-[#D1D5DB] mb-4 leading-relaxed">{step.description}</p>
 
-                    <p className="text-sm text-[#0044FF]/70 italic">{step.duration}</p>
+                    <p className="text-sm text-metal-plateado/70 italic">{step.duration}</p>
                   </div>
                 </motion.div>
               )

@@ -23,8 +23,8 @@ export default function Image() {
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        background: 'rgba(0, 68, 255, 0.05)',
-                        border: '2px solid rgba(0, 68, 255, 0.2)',
+                        background: 'rgba(192, 192, 192, 0.05)',
+                        border: '2px solid rgba(192, 192, 192, 0.2)',
                         borderRadius: '50%',
                         width: '240px',
                         height: '240px',
@@ -35,7 +35,7 @@ export default function Image() {
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="#0044FF"
+                        stroke="#d1d5db"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -54,7 +54,7 @@ export default function Image() {
                         display: 'flex',
                     }}
                 >
-                    INK<span style={{ color: '#0044FF', marginLeft: '30px' }}>STUDIO</span>
+                    INK<span style={{ color: '#d1d5db', marginLeft: '30px' }}>STUDIO</span>
                 </div>
                 <div
                     style={{

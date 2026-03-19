@@ -15,16 +15,16 @@ export default function Icon() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     background: 'transparent',
-                    border: '2px solid rgba(0, 68, 255, 0.4)',
+                    border: '2px solid rgba(192, 192, 192, 0.4)',
                     borderRadius: '50%',
-                    backgroundColor: 'rgba(0, 68, 255, 0.1)',
+                    backgroundColor: 'rgba(192, 192, 192, 0.1)',
                 }}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="none"
-                    stroke="#0044FF"
+                    stroke="#d1d5db"
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"

@@ -1,18 +1,17 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Calendar, Trophy, Palette, Star } from "lucide-react"
+import { Feather, Palette, Globe, Calendar } from "lucide-react"
 import Image from "next/image"
-import MagneticButton from "./magnetic-button"
-import { useTypewriter } from "@/hooks/use-typewriter"
-import { Menu, X } from "lucide-react";
+import Link from "next/link"
+import { useLanguage } from "@/lib/i18n"
 
 export default function HeroSection() {
-  const typewriterText = useTypewriter("Custom body art. Your vision permanently realized.", 50)
+  const { t } = useLanguage()
 
   return (
     <motion.section
-      className="relative min-h-screen flex items-center justify-center bg-linear-to-br from-black via-[#1A1A1A] to-black overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden"
       initial="hidden"
       animate="visible"
       variants={{
@@ -24,11 +23,23 @@ export default function HeroSection() {
         },
       }}
     >
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/fondo-geometrico_53876-90650.jpg"
+          alt="Geometric Background"
+          fill
+          priority
+          className="object-cover opacity-80"
+        />
+        <div className="absolute inset-0 bg-linear-to-b from-black/50 via-transparent to-black" />
+      </div>
+
       {/* Floating particles background */}
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1 h-1 bg-[#0044FF]/30 rounded-full"
+          className="absolute w-1 h-1 bg-metal-plateado/30 rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
@@ -47,7 +58,7 @@ export default function HeroSection() {
         />
       ))}
 
-      <div className="relative z-10 text-center px-6 max-w-7xl mx-auto">
+      <div className="relative z-10 text-center px-6 max-w-7xl mx-auto pt-32 md:pt-48 pb-10">
         {/* Logo/Brand */}
         <motion.div
           className="mb-8"
@@ -60,17 +71,42 @@ export default function HeroSection() {
             },
           }}
         >
-          <div className="flex flex-col items-center justify-center gap-2 mb-8 mt-4">
-            <h2 className="font-heading font-light text-7xl md:text-[9rem] text-white tracking-widest uppercase leading-none">
-              INK
-            </h2>
-            <h2 className="font-heading font-light text-4xl md:text-6xl text-[#0044FF] tracking-[0.3em] uppercase">
-              STUDIO
-            </h2>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-32 relative">
+
+            {/* Logo Image as a Floating Crest */}
+            <motion.div
+              className="w-48 h-48 md:w-80 md:h-80 relative flex items-center justify-center z-20"
+              animate={{ y: [0, -6, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Image
+                src="/logo.jpg"
+                alt="Coni Perez Logo"
+                width={380}
+                height={380}
+                className="object-contain w-full h-full filter invert mix-blend-screen opacity-80 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                priority
+              />
+            </motion.div>
+
+            {/* Brand Name Structure */}
+            <div className="flex flex-col items-center justify-center z-10 pointer-events-none pt-2">
+              <h2 className="font-heading font-normal text-7xl md:text-[9rem] text-white tracking-[0.15em] md:tracking-[0.2em] uppercase leading-none drop-shadow-2xl text-center m-0 p-0 md:-mt-8">
+                CONI
+              </h2>
+
+              {/* Elegant Metallic Divider */}
+              <div className="w-full h-[1px] bg-metal-plateado my-5 md:my-7 opacity-40"></div>
+
+              <h2 className="font-heading font-light text-5xl md:text-[5.5rem] text-metal-plateado tracking-[0.4em] uppercase leading-none text-center m-0 p-0">
+                PEREZ
+              </h2>
+            </div>
+
           </div>
         </motion.div>
 
-        {/* Main Headline */}
+        {/* Main Headline (Temporarily Commented Out)
         <motion.h1
           className="font-heading font-light text-5xl md:text-7xl lg:text-8xl text-white mb-6 tracking-tight leading-tight max-w-5xl mx-auto min-h-[200px] md:min-h-[300px]"
           variants={{
@@ -83,8 +119,9 @@ export default function HeroSection() {
           }}
         >
           {typewriterText}
-          <span className="animate-pulse text-[#0044FF]">|</span>
+          <span className="animate-pulse text-metal-plateado">|</span>
         </motion.h1>
+        */}
 
         {/* Subheadline
         <motion.p
@@ -103,7 +140,7 @@ export default function HeroSection() {
 
         {/* CTA Buttons */}
         <motion.div
-          className="flex flex-col items-center gap-6"
+          className="flex flex-col items-center justify-center mt-12 md:mt-24"
           variants={{
             hidden: { opacity: 0, y: 20 },
             visible: {
@@ -113,23 +150,18 @@ export default function HeroSection() {
             },
           }}
         >
-          <MagneticButton href="/booking" className="gap-2 px-8 py-4 rounded-sm glow-accent hover:bg-white transition-colors duration-300">
-            <Calendar className="w-5 h-5" />
-            Book Now
-          </MagneticButton>
-
-          {/* <a
+          {/* Replaced MagneticButton with Link and translated text */}
+          <Link
             href="/booking"
-            className="text-[#0044FF] hover:text-white transition-colors duration-300 flex items-center gap-2 text-lg group"
+            className="px-12 py-5 bg-metal-plateado text-black font-semibold text-xl rounded-full glow-accent hover:bg-white transition-all duration-500 hover:scale-105"
           >
-            <span className="border-b border-[#0044FF] group-hover:border-white transition-colors">Schedule Consultation</span>
-            <span className="group-hover:translate-x-1 transition-transform">→</span>
-          </a> */}
+            {t("hero_cta")}
+          </Link>
         </motion.div>
 
         {/* Trust Indicators */}
         <motion.div
-          className="mt-16 text-sm text-[#0044FF]/70 tracking-widest uppercase flex flex-wrap items-center justify-center gap-4 md:gap-8"
+          className="mt-16 text-sm text-metal-plateado/70 tracking-widest uppercase flex flex-wrap items-center justify-center gap-4 md:gap-8"
           variants={{
             hidden: { opacity: 0 },
             visible: {
@@ -139,17 +171,17 @@ export default function HeroSection() {
           }}
         >
           <span className="flex items-center gap-2">
-            <Trophy className="w-4 h-4" />Custom Designs
+            <Feather className="w-4 h-4" />{t("hero_custom")}
           </span>
           <span className="hidden md:inline">|</span>
           <span className="flex items-center gap-2">
             <Palette className="w-4 h-4" />
-            European Precision
+            {t("hero_precision")}
           </span>
           <span className="hidden md:inline">|</span>
           <span className="flex items-center gap-2">
-            <Star className="w-4 h-4" />
-            Premium Studio
+            <Globe className="w-4 h-4" />
+            {t("hero_studio")}
           </span>
         </motion.div>
       </div>

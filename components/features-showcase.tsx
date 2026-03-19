@@ -8,7 +8,7 @@ import Image from "next/image"
 const features = [
   {
     icon: Sparkles,
-    color: "#0044FF",
+    color: "#d1d5db",
     title: "100% Custom Designs",
     description:
       "Every tattoo is created from scratch, inspired by your personal story and energy. No flash. No templates. Fully custom creation.",
@@ -17,7 +17,7 @@ const features = [
   },
   {
     icon: Eye,
-    color: "#0044FF",
+    color: "#d1d5db",
     title: "High-Precision Realism",
     description:
       "Details, contrast, and textures that turn skin into living art. Influenced by European realism masters.",
@@ -26,7 +26,7 @@ const features = [
   },
   {
     icon: User,
-    color: "#0044FF",
+    color: "#d1d5db",
     title: "Exclusive Artistic Experience",
     description:
       "Direct communication with you—no middlemen. A clear, professional process from consultation to aftercare.",
@@ -35,7 +35,7 @@ const features = [
   },
   {
     icon: Layers,
-    color: "#0044FF",
+    color: "#d1d5db",
     title: "Perfect Anatomical Composition",
     description:
       "Each piece adapts to your body's movement and shape for complete visual harmony. Art that flows with you.",
@@ -44,7 +44,7 @@ const features = [
   },
   {
     icon: Crown,
-    color: "#0044FF",
+    color: "#d1d5db",
     title: "Premium Atmosphere, Human Approach",
     description:
       "Sessions designed to connect, inspire, and experience art with calm and respect. Luxury studio environment.",
@@ -64,7 +64,7 @@ function FeatureItem({ feature, index }: { feature: (typeof features)[0]; index:
   return (
     <motion.div
       ref={ref}
-      className={`sticky flex flex-col md:flex-row gap-12 items-center p-8 md:p-12 mb-24 rounded-3xl border border-[#0044FF]/20 shadow-2xl backdrop-blur-xl bg-[#131313]/90 overflow-hidden`}
+      className={`sticky flex flex-col md:flex-row gap-12 items-center p-8 md:p-12 mb-24 rounded-3xl border border-gray-300/20 shadow-2xl backdrop-blur-xl bg-[#131313]/90 overflow-hidden`}
       style={{ top: `${topOffset}px` }}
       initial={{ opacity: 0, scale: 0.95, y: 50 }}
       whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -72,7 +72,7 @@ function FeatureItem({ feature, index }: { feature: (typeof features)[0]; index:
       transition={{ duration: 0.8, ease: [0.22, 0.61, 0.36, 1] }}
     >
       <div className={`w-full md:w-1/2 z-10 ${feature.imagePosition === "right" ? "md:order-1" : "md:order-2"}`}>
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#0044FF]/10 mb-8 border border-[#0044FF]/30">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-metal-plateado/10 mb-8 border border-gray-300/30">
           <Icon className="w-8 h-8" style={{ color: feature.color }} />
         </div>
         <h3 className="font-heading text-4xl md:text-5xl text-white mb-6 font-light leading-tight">{feature.title}</h3>

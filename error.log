@@ -1,0 +1,17 @@
+C:\Users\Natalia\Documents\TATTOO-CONI-PEREZ\purge_blue.js:22
+    content = content.replace(new RegExp(BLUE_RGBA1.replace(/\s/g, '\\s*'), 'g'), 'rgba(192, 192, 192');
+                              ^
+
+SyntaxError: Invalid regular expression: /rgba(0,\s*68,\s*255/g: Unterminated group
+    at new RegExp (<anonymous>)
+    at replaceInFile (C:\Users\Natalia\Documents\TATTOO-CONI-PEREZ\purge_blue.js:22:31)
+    at processDir (C:\Users\Natalia\Documents\TATTOO-CONI-PEREZ\purge_blue.js:50:13)
+    at processDir (C:\Users\Natalia\Documents\TATTOO-CONI-PEREZ\purge_blue.js:47:17)
+    at processDir (C:\Users\Natalia\Documents\TATTOO-CONI-PEREZ\purge_blue.js:47:17)
+    at Object.<anonymous> (C:\Users\Natalia\Documents\TATTOO-CONI-PEREZ\purge_blue.js:55:1)
+    at Module._compile (node:internal/modules/cjs/loader:1554:14)
+    at Object..js (node:internal/modules/cjs/loader:1706:10)
+    at Module.load (node:internal/modules/cjs/loader:1289:32)
+    at Function._load (node:internal/modules/cjs/loader:1108:12)
+
+Node.js v22.14.0

@@ -2,8 +2,9 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Playfair_Display, Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
-import Script from "next/script"
 import Navbar from "@/components/navbar"
+import LanguageSwitcher from "@/components/language-switcher"
+import { LanguageProvider } from "@/lib/i18n"
 import "./globals.css"
 
 const playfair = Playfair_Display({
@@ -20,14 +21,13 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "INK STUDIO | Custom Art",
+  title: "CONI PEREZ | Tattoo Artist",
   description:
-    "Tattoo studio specialized in custom designs and precision art. Premium experience in realistic tattoos and unique body art.",
+    "Tattoo studio specialized in custom designs and precision art. Premium experience in realism and unique body art.",
   openGraph: {
-    title: "INK STUDIO | Tattoo Studio",
+    title: "CONI PEREZ | Portfolio",
     description: "Custom designs and precision art. Book your exclusive consultation.",
   },
-  generator: "v0.app",
 }
 
 export default function RootLayout({
@@ -37,10 +37,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js"></script>
       <body className={`font-body antialiased`}>
-        <Navbar />
-        {children}
+        <LanguageProvider>
+          <Navbar />
+          <LanguageSwitcher />
+          {children}
+        </LanguageProvider>
         <Analytics />
       </body>
     </html>
