@@ -15,7 +15,9 @@ export default function HeroSection() {
       initial="hidden"
       animate="visible"
       variants={{
+        hidden: { opacity: 1 },
         visible: {
+          opacity: 1,
           transition: {
             staggerChildren: 0.3,
             delayChildren: 0.2,
@@ -84,7 +86,7 @@ export default function HeroSection() {
                 alt="Coni Perez Logo"
                 width={380}
                 height={380}
-                className="object-contain w-full h-full filter invert mix-blend-screen opacity-80 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
+                className="object-contain w-full h-full filter invert mix-blend-screen opacity-70 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]"
                 priority
               />
             </motion.div>

@@ -1,8 +1,8 @@
 import TypeformBooking from "@/components/typeform-booking"
 
 export const metadata = {
-  title: "Book Your Tattoo | INK Studio",
-  description: "Book your tattoo with us. Simple, elegant form.",
+  title: "Reserva Tu Tatuaje | Coni Pérez",
+  description: "Reserva tu tatuaje de forma simple y elegante.",
 }
 
 export default function BookingPage() {

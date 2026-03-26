@@ -40,11 +40,11 @@ export default function LuxuryFooter() {
             <h4 className="font-heading text-xl text-white mb-6 font-light">{t("footer_contact")}</h4>
             <div className="space-y-4">
               <a
-                href="mailto:info@tattoostudio.com"
+                href="mailto:hola@coniperez.com"
                 className="flex items-center gap-3 text-[#D1D5DB] hover:text-metal-plateado transition-colors"
               >
                 <Mail className="w-5 h-5" />
-                info@tattoostudio.com
+                hola@coniperez.com
               </a>
               <div className="flex items-center gap-3 text-[#D1D5DB]">
                 <MapPin className="w-5 h-5" />
@@ -65,7 +65,7 @@ export default function LuxuryFooter() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Studio Location"
+                title="Ubicación"
               />
             </div>
           </div>

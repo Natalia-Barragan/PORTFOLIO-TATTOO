@@ -23,7 +23,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "CONI PEREZ | Tattoo Artist",
   description:
-    "Tattoo studio specialized in custom designs and precision art. Premium experience in realism and unique body art.",
+    "Visual artist and tattooer specializing in Fine Line and custom designs. Technical precision and artistic sensitivity for unique body art.",
   openGraph: {
     title: "CONI PEREZ | Portfolio",
     description: "Custom designs and precision art. Book your exclusive consultation.",

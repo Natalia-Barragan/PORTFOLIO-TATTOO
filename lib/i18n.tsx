@@ -61,9 +61,9 @@ export const translations: Translations = {
 
   // Footer
   footer_desc: { 
-    en: "Tattoo studio specialized in custom designs and precision art. Premium experience for unique body art.",
-    es: "Estudio de tatuajes especializado en diseños personalizados y arte de precisión. Experiencia premium para arte corporal único.",
-    pt: "Estúdio de tatuagem especializado em designs personalizados e arte de precisão. Experiência premium para arte corporal única."
+    en: "Independent visual artist and tattooer. Specializing in Fine Line and custom designs with technical precision and artistic sensitivity.",
+    es: "Artista visual y tatuadora independiente. Especializada en Fine Line y diseños personalizados con precisión técnica y sensibilidad artística.",
+    pt: "Artista visual e tatuadora independente. Especializada em Fine Line e desenhos personalizados com precisão técnica e sensibilidade artística."
   },
   footer_contact: { en: "Contact", es: "Contacto", pt: "Contato" },
   footer_location: { en: "Location", es: "Ubicación", pt: "Localização" },

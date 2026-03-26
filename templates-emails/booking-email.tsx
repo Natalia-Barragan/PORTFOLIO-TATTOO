@@ -44,12 +44,12 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
   const brandColor = '#d1d5db';
 
   const title = isArtist ? "New Booking Request 🚀" : "Booking Received! 🔥";
-  const subTitle = isArtist ? "New lead from website" : "Thanks for choosing our Studio";
-  const greeting = isArtist ? "Hello Team," : `Hey ${name}! 👋`;
+  const subTitle = isArtist ? "New lead from website" : "Thanks for choosing Coni Pérez";
+  const greeting = isArtist ? "Hello Coni," : `Hey ${name}! 👋`;
 
   const mainText = isArtist 
     ? "A new client has submitted a booking request. Here are their contact details and project idea:"
-    : "We've received your booking request. Our team is already reviewing your design idea to see how we can make it happen.";
+    : "I've received your booking request. I'm already reviewing your design idea to see how we can make it happen.";
 
   return (
     <Html lang="en" dir="ltr">
@@ -190,10 +190,10 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
               {!isArtist && (
                 <>
                   <Text className="text-gray-400 text-base mb-6 leading-relaxed">
-                    Our team will review your request and get back to you within 24 hours.
+                    I'll review your request and get back to you within 24 hours.
                   </Text>
                   <Text className="text-white text-base font-bold m-0">
-                    The Studio Team ⚡
+                    Coni Pérez ⚡
                   </Text>
                 </>
               )}
@@ -203,7 +203,7 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
             {/* Footer Legal */}
             <Section className="bg-[#000000] px-8 py-6 text-center border-t border-[#333333]">
               <Text className="text-gray-600 text-xs m-0 uppercase tracking-widest">
-                Tattoo Studio
+                Coni Pérez Tattoo
               </Text>
             </Section>
           </Container>

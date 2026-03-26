@@ -112,7 +112,7 @@ export async function POST(request: NextRequest) {
     await Promise.all([
       // Mail al Tatuador
       resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL || "reservas@tattoostudio.com",
+        from: process.env.RESEND_FROM_EMAIL || "reservas@coniperez.com",
         to: ARTIST_EMAIL,
         subject: `🔥 NEW LEAD: ${body.name}`,
         react: <EmailTemplate
@@ -123,9 +123,9 @@ export async function POST(request: NextRequest) {
 
       // Mail al Cliente 
       resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL || "reservas@tattoostudio.com",
+        from: process.env.RESEND_FROM_EMAIL || "reservas@coniperez.com",
         to: body.email,
-        subject: `Booking Received - Studio`,
+        subject: `Booking Received - Coni Pérez`,
         react: <EmailTemplate
           {...emailData}
           type="client"
