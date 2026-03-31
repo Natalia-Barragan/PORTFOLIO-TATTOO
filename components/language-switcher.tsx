@@ -6,7 +6,7 @@ import { Globe } from "lucide-react"
 import { useState } from "react"
 import { usePathname } from "next/navigation"
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({ variant = "floating" }: { variant?: "floating" | "inline" }) {
   const { language, setLanguage } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname()
@@ -22,8 +22,13 @@ export default function LanguageSwitcher() {
 
   const currentLang = languages.find((l) => l.code === language)
 
+  const containerClasses = 
+    variant === "floating" 
+      ? "fixed top-6 right-6 md:right-12 z-[100] mt-5 md:mt-0" 
+      : "relative"
+
   return (
-    <div className="fixed top-6 right-6 md:right-12 z-[100] mt-5 ">
+    <div className={containerClasses}>
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}

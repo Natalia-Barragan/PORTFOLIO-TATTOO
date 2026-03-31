@@ -15,6 +15,7 @@ export const translations: Translations = {
   nav_about: { en: "About", es: "Sobre mí", pt: "Sobre mim" },
   nav_portfolio: { en: "Portfolio", es: "Galería", pt: "Portfólio" },
   nav_book: { en: "Book Now", es: "Reservar", pt: "Agendar" },
+  language: { en: "Language", es: "Idioma", pt: "Idioma" },
 
   // Hero
   hero_cta: { en: "Book Now", es: "Reservar", pt: "Agendar" },

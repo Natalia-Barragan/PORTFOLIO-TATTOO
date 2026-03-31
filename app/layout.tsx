@@ -21,15 +21,16 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "CONI PEREZ | Tattoo Portfolio",
-  description: "Artista plástica y tatuadora",
+  title: "CONI PEREZ | Tattoo Artist",
+  description:
+    "Visual artist and tattooer specializing in Fine Line and custom designs. Technical precision and artistic sensitivity for unique body art.",
   icons: {
     icon: "/icon.png",
     apple: "/icon.png",
   },
   openGraph: {
-    title: "CONI PEREZ | Tattoo Portfolio",
-    description: "Artista plástica y tatuadora",
+    title: "CONI PEREZ | Portfolio",
+    description: "Custom designs and precision art. Book your exclusive consultation.",
     images: ["/opengraph-image.png"],
   },
 }
@@ -40,11 +41,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="es" className={`${playfair.variable} ${inter.variable}`}>
       <body className={`font-body antialiased`}>
         <LanguageProvider>
           <Navbar />
-          <LanguageSwitcher />
+          <div className="hidden md:block">
+            <LanguageSwitcher />
+          </div>
           {children}
         </LanguageProvider>
         <Analytics />

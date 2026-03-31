@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react"
 import { useLanguage } from "@/lib/i18n"
 
 import { usePathname } from "next/navigation"
+import LanguageSwitcher from "./language-switcher"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -60,20 +61,25 @@ export default function Navbar() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden absolute top-full mt-4 right-0 w-48 bg-[#0a0a0a] border border-gray-300/20 rounded-xl shadow-2xl overflow-hidden z-40"
+            className="md:hidden absolute top-full mt-4 right-0 w-64 bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-40 p-4"
           >
-            <div className="flex flex-col p-2">
+            <div className="flex flex-col gap-1">
+              <div className="flex items-center justify-between px-4 py-2 mb-2 border-b border-white/10">
+                <span className="text-xs font-bold text-white/40 uppercase tracking-widest">{t("language")}</span>
+                <LanguageSwitcher variant="inline" />
+              </div>
+              
               <Link
                 href="/#about"
                 onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 text-gray-300 hover:bg-metal-plateado/10 hover:text-metal-plateado rounded-lg transition-colors text-sm font-medium"
+                className="px-4 py-3 text-gray-300 hover:bg-white/5 hover:text-metal-plateado rounded-xl transition-all text-sm font-medium flex items-center"
               >
                 {t("nav_about")}
               </Link>
               <Link
                 href="/#portfolio"
                 onClick={() => setIsMenuOpen(false)}
-                className="px-4 py-3 text-gray-300 hover:bg-metal-plateado/10 hover:text-metal-plateado rounded-lg transition-colors text-sm font-medium"
+                className="px-4 py-3 text-gray-300 hover:bg-white/5 hover:text-metal-plateado rounded-xl transition-all text-sm font-medium flex items-center"
               >
                 {t("nav_portfolio")}
               </Link>
