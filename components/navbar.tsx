@@ -24,17 +24,22 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[95%] md:w-auto md:min-w-[600px] max-w-7xl bg-white/[0.08] backdrop-blur-2xl border border-white/20 rounded-full shadow-[0_8px_32px_rgba(255,255,255,0.1)]"
     >
-      <div className="px-8 py-3 flex justify-between items-center relative">
+      <div className="px-4 md:px-8 py-3 flex justify-between items-center relative">
 
         {/* Navigation Links (Left Side) */}
-        <div className="flex items-center gap-4 md:gap-8">
+        <div className="flex items-center gap-2 md:gap-8">
           {/* Mobile Menu Button - Left on mobile */}
           <button
-            className="md:hidden text-white p-1 hover:text-metal-plateado transition-colors"
+            className="md:hidden text-white p-2 hover:text-metal-plateado transition-colors bg-white/5 rounded-full border border-white/10"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
+
+          {/* Language Switcher for Mobile - Directly visible */}
+          <div className="md:hidden">
+            <LanguageSwitcher variant="inline" />
+          </div>
 
           <div className="hidden md:flex items-center gap-8">
             <Link href="/#about" className="text-gray-300 hover:text-metal-plateado text-base font-medium transition-colors">{t("nav_about")}</Link>
@@ -64,11 +69,6 @@ export default function Navbar() {
             className="md:hidden absolute top-full mt-4 right-0 w-64 bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-40 p-4"
           >
             <div className="flex flex-col gap-1">
-              <div className="flex items-center justify-between px-4 py-2 mb-2 border-b border-white/10">
-                <span className="text-xs font-bold text-white/40 uppercase tracking-widest">{t("language")}</span>
-                <LanguageSwitcher variant="inline" />
-              </div>
-              
               <Link
                 href="/#about"
                 onClick={() => setIsMenuOpen(false)}

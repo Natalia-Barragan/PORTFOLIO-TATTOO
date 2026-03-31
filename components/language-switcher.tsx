@@ -32,14 +32,20 @@ export default function LanguageSwitcher({ variant = "floating" }: { variant?: "
       <div className="relative">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/20 hover:border-metal-plateado/50 backdrop-blur-md transition-all duration-300 group shadow-lg"
+          className={`flex items-center gap-2 px-3 py-1.5 rounded-full backdrop-blur-md transition-all duration-300 group shadow-lg border ${
+            isOpen 
+              ? "bg-white/15 border-metal-plateado/50 shadow-metal-plateado/20" 
+              : "bg-white/5 border-white/20 hover:border-metal-plateado/40 hover:bg-white/10"
+          }`}
         >
-          <img
-            src={`https://flagcdn.com/w40/${currentLang?.flag}.png`}
-            alt={currentLang?.label}
-            className="w-5 h-3.5 object-cover rounded-[1px] shadow-sm"
-          />
-          <span className="text-xs font-bold text-white uppercase tracking-widest">{language}</span>
+          <div className="relative w-5 h-3.5 overflow-hidden rounded-[2px] shadow-sm ring-1 ring-white/20">
+            <img
+              src={`https://flagcdn.com/w40/${currentLang?.flag}.png`}
+              alt={currentLang?.label}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          </div>
+          <span className="text-[10px] md:text-xs font-bold text-white uppercase tracking-widest opacity-80 group-hover:opacity-100">{language}</span>
         </button>
 
         <AnimatePresence>
