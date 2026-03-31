@@ -9,7 +9,7 @@ import BackToTopArrow from "@/components/scroll-to-top"
 export default function AboutMe() {
   const { t } = useLanguage()
   const [currentImage, setCurrentImage] = useState(0)
-  const images = ["/Coni1.jpg", "/Coni2.JPG"]
+  const images = ["/Coni1.jpg", "/Coni2.jpg"]
 
   useEffect(() => {
     const timer = setInterval(() => {
