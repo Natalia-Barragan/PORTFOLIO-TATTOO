@@ -61,17 +61,23 @@ export default function AftercareSection() {
 
 function FlipCard({ step, index }: { step: any; index: number }) {
   const { t } = useLanguage()
+  const [isFlipped, setIsFlipped] = useState(false)
   const Icon = step.icon
 
   return (
     <motion.div
-      className="group perspective-1000 h-[350px]"
+      className="group perspective-1000 h-[350px] cursor-pointer"
+      onClick={() => setIsFlipped(!isFlipped)}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      <div className="relative w-full h-full transition-all duration-700 preserve-3d group-hover:rotate-y-180">
+      <div
+        className={`relative w-full h-full transition-all duration-700 preserve-3d group-hover:rotate-y-180 ${
+          isFlipped ? "rotate-y-180" : ""
+        }`}
+      >
         {/* Front side */}
         <div className="absolute inset-0 w-full h-full backface-hidden bg-[#2A2A2A] border border-gray-300/10 rounded-xl p-8 flex flex-col items-center justify-center text-center shadow-xl">
           <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center mb-6 border border-white/10 group-hover:border-metal-plateado/50 transition-colors">
@@ -80,7 +86,12 @@ function FlipCard({ step, index }: { step: any; index: number }) {
           <h3 className="font-heading text-2xl text-white font-light uppercase tracking-wide">
             {step.title}
           </h3>
-          <div className="mt-8 text-white/20 text-xs uppercase tracking-[0.2em]">{t("aftercare_hover")}</div>
+          <div className="mt-8 text-white/20 text-xs uppercase tracking-[0.2em] hidden md:block">
+            {t("aftercare_hover")}
+          </div>
+          <div className="mt-8 text-white/20 text-xs uppercase tracking-[0.2em] md:hidden">
+            {t("aftercare_tap")}
+          </div>
         </div>
 
         {/* Back side */}
@@ -88,9 +99,7 @@ function FlipCard({ step, index }: { step: any; index: number }) {
           <h4 className="font-heading text-xl text-black mb-4 font-bold border-b border-black/20 pb-2 w-full">
             {step.title.includes(". ") ? step.title.split(". ")[1] : step.title}
           </h4>
-          <p className="text-black/80 text-sm leading-relaxed font-medium">
-            {step.description}
-          </p>
+          <p className="text-black/80 text-sm leading-relaxed font-medium">{step.description}</p>
         </div>
       </div>
     </motion.div>

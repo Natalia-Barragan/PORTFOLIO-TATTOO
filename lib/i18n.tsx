@@ -23,6 +23,7 @@ export const translations: Translations = {
   // Aftercare Section
   aftercare_title: { en: "Tattoo Aftercare", es: "Cuidados del Tatuaje", pt: "Cuidados com a Tatuagem" },
   aftercare_hover: { en: "Hover to reveal", es: "Pasa el cursor", pt: "Passe o cursor" },
+  aftercare_tap: { en: "Tap to reveal", es: "Toca para leer", pt: "Toque para ler" },
   
   // Aftercare Steps
   aftercare_step1_title: { en: "1. First Hours", es: "1. Primeras Horas", pt: "1. Primeiras Horas" },
