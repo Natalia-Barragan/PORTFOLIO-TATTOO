@@ -16,7 +16,7 @@ import Widget from "@/components/Widget"
 
 export default function Home() {
   return (
-    <main className="relative bg-black text-white overflow-x-hidden">
+    <main className="relative bg-black text-white overflow-x-clip">
       <ScrollProgress />
       <HeroSection />
       <section id="about">

@@ -5,6 +5,7 @@ import { Feather, Palette, Globe, Calendar } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useLanguage } from "@/lib/i18n"
+import InkSmokeBackground from "@/components/ink-smoke-background"
 
 export default function HeroSection() {
   const { t } = useLanguage()
@@ -25,15 +26,9 @@ export default function HeroSection() {
         },
       }}
     >
-      {/* Background Image */}
+      {/* Fondo animado: humo de tinta plateado + tintero y máquina de tatuar */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/fondo-geometrico_53876-90650.jpg"
-          alt="Geometric Background"
-          fill
-          priority
-          className="object-cover opacity-80"
-        />
+        <InkSmokeBackground />
         <div className="absolute inset-0 bg-linear-to-b from-black/50 via-transparent to-black" />
       </div>
 

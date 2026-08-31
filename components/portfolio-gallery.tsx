@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import { X, Trophy } from "lucide-react"
@@ -16,6 +16,7 @@ const portfolioItems = [
     year: 2024,
     description: "Custom portrait with European precision",
     awards: ["Best Portrait 2024"],
+    rotation: -9,
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ const portfolioItems = [
     category: "Realism",
     year: 2024,
     description: "Detailed work showing European technique",
+    rotation: 6,
   },
   {
     id: 3,
@@ -33,6 +35,7 @@ const portfolioItems = [
     year: 2023,
     description: "Anatomically fluid design across the arm",
     awards: ["Best Realism 2023"],
+    rotation: -6,
   },
   {
     id: 4,
@@ -41,6 +44,7 @@ const portfolioItems = [
     category: "Realism",
     year: 2024,
     description: "Capturing the spirit of nature",
+    rotation: 8,
   },
   {
     id: 5,
@@ -49,6 +53,7 @@ const portfolioItems = [
     category: "Portrait",
     year: 2023,
     description: "Depth and emotion in every detail",
+    rotation: -7,
   },
   {
     id: 6,
@@ -57,23 +62,20 @@ const portfolioItems = [
     category: "Custom",
     year: 2024,
     description: "Unique design tailored to the client's story",
+    rotation: 5,
   },
 ]
-
-// Categories map for translations
-const categoryKeys: Record<string, string> = {
-  All: "cat_all",
-  Portrait: "cat_all", // Placeholder, will fix below
-  Realism: "cat_all", 
-  "Full Sleeve": "cat_all",
-  Custom: "cat_all",
-}
-
 
 export default function PortfolioGallery() {
   const { t } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [lightboxItem, setLightboxItem] = useState<(typeof portfolioItems)[0] | null>(null)
+
+  const sectionRef = useRef<HTMLElement>(null)
+  const stickyRef = useRef<HTMLDivElement>(null)
+  const deckRef = useRef<HTMLDivElement>(null)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  const hasMountedRef = useRef(false)
 
   const categories = [
     { id: "All", label: t("cat_all") },
@@ -83,27 +85,165 @@ export default function PortfolioGallery() {
     { id: "Custom", label: t("cat_custom") },
   ]
 
-  const filteredItems = selectedCategory === "All" ? portfolioItems : portfolioItems.filter((item) => item.category === selectedCategory)
+  // El deck queda montado siempre completo; el filtro sólo decide qué
+  // tarjetas participan de la grilla abierta y cuáles quedan ocultas, así
+  // el cambio de categoría reacomoda en el lugar sin volver a apilar todo.
+  useEffect(() => {
+    const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v))
+    const smooth = (t: number) => t * t * (3 - 2 * t)
 
+    const section = sectionRef.current
+    const sticky = stickyRef.current
+    const deck = deckRef.current
+    const cards = cardRefs.current.filter((c): c is HTMLDivElement => c !== null)
+    if (!section || !sticky || !deck || cards.length === 0) return
+
+    // El scroll mueve las tarjetas 1 a 1, sin transition (si no, se sienten
+    // "atrasadas" respecto del scroll). Sólo al cambiar de filtro se anima
+    // el reacomodo, con una transition temporal que se saca enseguida.
+    let filterTransitionTimeout: ReturnType<typeof setTimeout> | null = null
+    if (hasMountedRef.current) {
+      cards.forEach((c) => {
+        c.style.transition = "transform 350ms ease-out, opacity 300ms ease-out"
+      })
+      filterTransitionTimeout = setTimeout(() => {
+        cards.forEach((c) => {
+          c.style.transition = ""
+        })
+      }, 380)
+    }
+    hasMountedRef.current = true
+
+    let targets: { x: number; y: number }[] = []
+    let scrubDistance = 0
+    let closedY = 0
+
+    function isVisible(index: number) {
+      const item = portfolioItems[index]
+      return selectedCategory === "All" || item.category === selectedCategory
+    }
+
+    function sectionProgress() {
+      const r = section!.getBoundingClientRect()
+      if (scrubDistance <= 0) return 0
+      return clamp(-r.top / scrubDistance, 0, 1)
+    }
+
+    function layout() {
+      const w = window.innerWidth
+      const cols = w < 768 ? 1 : w < 1024 ? 2 : 3
+      const gap = w < 768 ? 20 : 32
+      const availableWidth = Math.min(w * 0.92, 1216)
+      const cw = Math.min(400, (availableWidth - (cols - 1) * gap) / cols)
+      const ch = cw * 0.85
+      const visibleCount = portfolioItems.filter((_, i) => isVisible(i)).length
+      const rows = Math.max(1, Math.ceil(visibleCount / cols))
+
+      const gw = cols * cw + (cols - 1) * gap
+      const gh = rows * ch + (rows - 1) * gap
+
+      deck!.style.height = `${gh}px`
+      deck!.style.width = `${gw}px`
+      closedY = ch / 2 + 80
+
+      cards.forEach((c) => {
+        c.style.width = `${cw}px`
+        c.style.height = `${ch}px`
+      })
+
+      targets = Array.from({ length: visibleCount }, (_, j) => {
+        const col = j % cols
+        const row = Math.floor(j / cols)
+        return {
+          x: col * (cw + gap) - gw / 2 + cw / 2,
+          y: row * (ch + gap) + ch / 2,
+        }
+      })
+
+      const stickyHeight = sticky!.getBoundingClientRect().height
+      scrubDistance = Math.max(window.innerHeight * 1.1, stickyHeight * 0.5)
+      section!.style.height = `${scrubDistance + stickyHeight}px`
+    }
+
+    function render() {
+      const p = sectionProgress()
+      let j = 0
+      cards.forEach((c, i) => {
+        const baseRot = Number(c.dataset.r) || 0
+        const angle = ((i * 63) % 360) * (Math.PI / 180)
+        const closedX = Math.cos(angle) * 70
+        const closedYi = closedY + Math.sin(angle) * 45
+
+        if (!isVisible(i)) {
+          c.style.transform = `translate(-50%, -50%) translate(${closedX}px, ${closedYi}px) rotate(${baseRot}deg) scale(0.8)`
+          c.style.opacity = "0"
+          c.style.pointerEvents = "none"
+          c.style.zIndex = "0"
+          return
+        }
+
+        const target = targets[j] || { x: closedX, y: closedYi }
+        const cp = clamp((p - 0.05 - j * 0.04) / 0.62, 0, 1)
+        const e = smooth(cp)
+        const tx = closedX + (target.x - closedX) * e
+        const ty = closedYi + (target.y - closedYi) * e
+        const rot = baseRot * (1 - e)
+        const sc = 0.86 + e * 0.14
+        c.style.transform = `translate(-50%, -50%) translate(${tx}px, ${ty}px) rotate(${rot}deg) scale(${sc})`
+        c.style.opacity = "1"
+        c.style.pointerEvents = "auto"
+        c.style.zIndex = String(j)
+        j++
+      })
+    }
+
+    let ticking = false
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          render()
+          ticking = false
+        })
+        ticking = true
+      }
+    }
+    function onResize() {
+      layout()
+      render()
+    }
+
+    layout()
+    render()
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onResize)
+
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onResize)
+      if (filterTransitionTimeout) clearTimeout(filterTransitionTimeout)
+    }
+  }, [selectedCategory])
 
   return (
-    <section className="relative bg-linear-to-b from-[#1A1A1A] to-black py-32">
-      <BackToTopArrow />
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
+    <>
+    <section ref={sectionRef} className="relative">
+      <div ref={stickyRef} className="sticky top-0 overflow-hidden bg-linear-to-b from-[#1A1A1A] to-black pb-16">
+        <BackToTopArrow />
+
         <motion.div
-          className="text-center mb-16"
+          className="text-center pt-20 pb-6 px-6"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="font-heading font-light text-4xl md:text-6xl text-white mb-6">{t("gallery_title")}</h2>
-          <p className="text-xl md:text-2xl text-[#D1D5DB] font-light">{t("gallery_subtitle")}</p>
+          <h2 className="font-heading font-light text-3xl md:text-5xl text-white mb-3">{t("gallery_title")}</h2>
+          <p className="text-lg md:text-xl text-[#D1D5DB] font-light">{t("gallery_subtitle")}</p>
         </motion.div>
 
         {/* Filter Buttons */}
         <motion.div
-          className="flex flex-wrap justify-center gap-4 mb-16"
+          className="flex flex-wrap justify-center gap-4 mb-8 px-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -123,68 +263,56 @@ export default function PortfolioGallery() {
           ))}
         </motion.div>
 
-        {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{
-                  scale: 1.03,
-                  transition: { duration: 0.4 },
-                }}
-                className="group relative cursor-pointer rounded-sm overflow-hidden"
-                onClick={() => setLightboxItem(item)}
-              >
-                <div className="relative h-[400px] md:h-[450px] rounded-2xl overflow-hidden shadow-xl border border-gray-300/10">
-                  <Image
-                    src={item.image || "/placeholder.svg"}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110 filter hover:brightness-110"
-                  />
-
-                  {/* Overlay */}
-                  <motion.div className="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-8 left-8 right-8">
-                      <p className="text-xs uppercase tracking-widest text-metal-plateado mb-2">{item.category}</p>
-                      <h4 className="text-2xl font-heading font-light text-white mb-2">{item.title}</h4>
-                      <p className="text-sm text-[#D1D5DB]">{item.description}</p>
-                      {item.awards && (
-                        <div className="mt-3 flex items-center gap-2">
-                          <Trophy className="w-4 h-4 text-metal-plateado" />
-                          <span className="text-xs text-metal-plateado">{item.awards[0]}</span>
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+        {/* Deck: fotos apiladas que se abren en grilla al scrollear */}
+        <div ref={deckRef} className="relative mx-auto">
+          {portfolioItems.map((item, i) => (
+            <div
+              key={item.id}
+              ref={(el) => {
+                cardRefs.current[i] = el
+              }}
+              data-r={item.rotation}
+              onClick={() => setLightboxItem(item)}
+              className="group absolute left-1/2 top-0 w-full cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_22px_55px_rgba(0,0,0,0.5)] [will-change:transform]"
+            >
+              <Image
+                src={item.image || "/placeholder.svg"}
+                alt={item.title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-110 filter group-hover:brightness-110"
+              />
+              <div className="absolute inset-0 flex flex-col justify-end bg-linear-to-t from-black/90 via-black/40 to-transparent p-5 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                <p className="text-[10px] uppercase tracking-widest text-metal-plateado mb-1">{item.category}</p>
+                <h4 className="font-heading text-lg font-light text-white">{item.title}</h4>
+                {item.awards && (
+                  <div className="mt-2 flex items-center gap-1.5">
+                    <Trophy className="h-3.5 w-3.5 text-metal-plateado" />
+                    <span className="text-[10px] text-metal-plateado">{item.awards[0]}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
-
-        {/* CTA After Gallery */}
-        <motion.div
-          className="text-center mt-20"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <a
-            href="/booking"
-            className="inline-block px-12 py-5 bg-metal-plateado text-black font-semibold text-lg rounded-full glow-accent hover:bg-white transition-all duration-500 hover:scale-105"
-          >
-            {t("gallery_cta")}
-          </a>
-        </motion.div>
       </div>
+    </section>
+
+      {/* CTA After Gallery: fuera de la section pinneada, para que no se
+          superponga con el scroll fijo de la galería */}
+      <motion.div
+        className="text-center py-20"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <a
+          href="/booking"
+          className="inline-block px-12 py-5 bg-metal-plateado text-black font-semibold text-lg rounded-full glow-accent hover:bg-white transition-all duration-500 hover:scale-105"
+        >
+          {t("gallery_cta")}
+        </a>
+      </motion.div>
 
       {/* Lightbox */}
       <AnimatePresence>
@@ -236,6 +364,6 @@ export default function PortfolioGallery() {
           </motion.div>
         )}
       </AnimatePresence>
-    </section>
+    </>
   )
 }
