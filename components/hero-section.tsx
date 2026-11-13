@@ -34,10 +34,10 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 0.61, 0.36, 1] }}
         >
-          <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-48 lg:gap-64 relative">
+          <div className="flex flex-col items-center justify-center relative">
 
             {/* Logo Image as a Floating Crest */}
-            <motion.div
+            {/* <motion.div
               className="w-48 h-48 md:w-80 md:h-80 relative flex items-center justify-center z-20"
               animate={{ y: [0, -6, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -47,14 +47,14 @@ export default function HeroSection() {
                 alt="Coni Perez Logo"
                 width={380}
                 height={380}
-                className="object-contain w-full h-full filter invert mix-blend-screen opacity-85"
+                className="object-contain w-full h-full filter invert mix-blend-screen"
                 priority
               />
-            </motion.div>
+            </motion.div> */}
 
             {/* Brand Name Structure */}
             <div className="flex flex-col items-center justify-center z-10 pointer-events-none pt-2">
-              <h2 className="font-heading font-medium text-7xl md:text-[9rem] text-white tracking-[0.15em] md:tracking-[0.2em] uppercase leading-none text-center m-0 p-0 md:-mt-8 [text-shadow:0_4px_28px_rgba(0,0,0,0.9),0_2px_8px_rgba(0,0,0,0.8)]">
+              <h2 className="font-heading font-medium text-7xl md:text-[9rem] text-white tracking-[0.15em] md:tracking-[0.2em] uppercase leading-none text-center m-0 p-0 [text-shadow:0_4px_28px_rgba(0,0,0,0.9),0_2px_8px_rgba(0,0,0,0.8)]">
                 CONI
               </h2>
 

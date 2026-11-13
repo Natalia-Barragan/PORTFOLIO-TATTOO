@@ -25,10 +25,11 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
   const [currentStep, setCurrentStep] = useState(0)
   const [submitted, setSubmitted] = useState(false)
 
-  // estados para controlar archivo adjunto (sin base de datos)
+  // estados para controlar archivo adjunto (link público vía ImageKit CDN, sin base de datos)
   const [isUploading, setIsUploading] = useState(false)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [previewUrl, setPreviewUrl] = useState<string>("")
+  const [imageUrl, setImageUrl] = useState<string>("")
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // estado para guardar los errores de validacion
@@ -146,7 +147,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
     }
   }
 
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = async (file: File) => {
     const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"]
     if (!allowedTypes.includes(file.type)) {
       setErrors({ ...errors, upload: "Solo se permiten imágenes JPG, PNG, WEBP o GIF." })
@@ -165,6 +166,30 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
     }
     setSelectedFile(file)
     setPreviewUrl(URL.createObjectURL(file))
+    setIsUploading(true)
+
+    try {
+      const data = new FormData()
+      data.append("file", file)
+
+      const res = await fetch("/api/upload-image", {
+        method: "POST",
+        body: data,
+      })
+
+      const result = await res.json()
+      if (!res.ok) {
+        throw new Error(result.error || "Error al subir la imagen")
+      }
+
+      setImageUrl(result.url)
+    } catch (err: any) {
+      setErrors({ ...errors, upload: err.message || "Error al generar el link de la imagen." })
+      setSelectedFile(null)
+      setPreviewUrl("")
+    } finally {
+      setIsUploading(false)
+    }
   }
 
   const handleSubmit = async () => {
@@ -175,7 +200,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
       formDataToSend.append("name", formData.name)
       formDataToSend.append("email", formData.email)
       formDataToSend.append("phone", formData.phone)
-      formDataToSend.append("contactMethod", formData.contactMethod || "email")
+      formDataToSend.append("contactMethod", formData.contactMethod || "whatsapp")
       formDataToSend.append("vision", formData.vision)
       formDataToSend.append("size", formData.size)
       formDataToSend.append("date", formData.date)
@@ -184,6 +209,9 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
 
       if (selectedFile) {
         formDataToSend.append("file", selectedFile)
+      }
+      if (imageUrl) {
+        formDataToSend.append("referenceImage", imageUrl)
       }
 
       const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5492214502618").replace(/\D/g, "")
@@ -196,7 +224,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
         `• *Idea / Visión:* ${formData.vision}`,
         formData.size ? `• *Tamaño aprox.:* ${formData.size}` : "",
         formData.date ? `• *Fecha estimada:* ${formData.date}` : "",
-        selectedFile ? `• *Imagen de referencia:* ${selectedFile.name}` : "",
+        imageUrl ? `• *Imagen de referencia:* ${imageUrl}` : "",
       ].filter(Boolean).join("\n")
 
       const waUrl = whatsappNumber
@@ -225,6 +253,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
     }
     setSelectedFile(null)
     setPreviewUrl("")
+    setImageUrl("")
     if (errors.upload) {
       const { upload, ...rest } = errors
       setErrors(rest)
@@ -383,11 +412,11 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
             )}
 
             {steps[currentStep].id === "upload" && (
-              <div className="space-y-6">
-                <p className="text-[#D1D5DB] mb-4">{t("form_upload_title")}</p>
+              <div className="space-y-4">
+                <p className="text-[#D1D5DB] mb-2">{t("form_upload_title")}</p>
 
                 <div
-                  className={`border-2 border-dashed rounded-sm p-8 text-center hover:border-gray-300 transition-colors cursor-pointer ${errors.upload ? "border-red-500" : "border-gray-300/30"}`}
+                  className={`border-2 border-dashed rounded-sm py-4 px-5 text-center hover:border-gray-300 transition-colors cursor-pointer ${errors.upload ? "border-red-500" : "border-gray-300/30"}`}
                   onClick={() => !isUploading && fileInputRef.current?.click()}
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={(e) => {
@@ -408,14 +437,22 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                     }}
                   />
 
-                  <Upload className="w-12 h-12 text-metal-plateado mx-auto mb-4" />
-                  <p className="text-white mb-2">{t("form_upload_label")}</p>
-                  <p className="text-sm text-[#D1D5DB]/70">PNG, JPG, WEBP hasta 10MB</p>
+                  {isUploading ? (
+                    <div className="text-metal-plateado animate-pulse font-medium py-2">
+                      {t("form_uploading")}
+                    </div>
+                  ) : (
+                    <>
+                      <Upload className="w-6 h-6 text-[#D1D5DB]/80 mx-auto mb-1.5" />
+                      <p className="text-white text-sm mb-0.5">{t("form_upload_label")}</p>
+                      <p className="text-xs text-[#D1D5DB]/70">PNG, JPG, WEBP hasta 10MB</p>
+                    </>
+                  )}
                 </div>
 
                 {errors.upload && <p className="text-red-500 text-sm text-center mt-2">⚠️ {errors.upload}</p>}
 
-                {selectedFile && (
+                {selectedFile && !isUploading && (
                   <div className="space-y-3">
                     <div className="flex items-center justify-between bg-[#2A2A2A] p-3 rounded-sm border border-green-500/30">
                       <span className="text-white text-sm truncate flex items-center gap-3">
