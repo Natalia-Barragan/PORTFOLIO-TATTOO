@@ -24,10 +24,10 @@ export const translations: Translations = {
   aftercare_title: { en: "Tattoo Aftercare", es: "Cuidados del Tatuaje", pt: "Cuidados com a Tatuagem" },
   aftercare_hover: { en: "Hover to reveal", es: "Pasa el cursor", pt: "Passe o cursor" },
   aftercare_tap: { en: "Tap to reveal", es: "Toca para leer", pt: "Toque para ler" },
-  
+
   // Aftercare Steps
   aftercare_step1_title: { en: "1. First Hours", es: "1. Primeras Horas", pt: "1. Primeiras Horas" },
-  aftercare_step1_desc: { 
+  aftercare_step1_desc: {
     en: "Remove the protective film after 2 to 4 hours. Wash the area immediately with lukewarm water and neutral soap to remove ink and plasma residues. Pat dry gently with disposable paper towels; never rub.",
     es: "Retira el film protector tras 2 a 4 horas. Lava la zona inmediatamente con agua tibia y jabón neutro para eliminar residuos de tinta y plasma. Seca dando toques suaves con toallas de papel desechables; nunca frotes.",
     pt: "Remova o filme protetor após 2 a 4 horas. Lave a área imediatamente com água morna e sabão neutro para remover resíduos de tinta e plasma. Seque suavemente com papel toalha descartável; nunca esfregue."
@@ -52,17 +52,19 @@ export const translations: Translations = {
   },
 
   // Gallery
-  gallery_title: { en: "Living Art Gallery", es: "Galería de Arte Vivo", pt: "Galeria de Arte Viva" },
-  gallery_subtitle: { en: "Precision, emotion, and timeless beauty", es: "Precisión, emoción y belleza atemporal", pt: "Precisão, emoção e beleza atemporal" },
+  gallery_title: { en: "Tattoo Gallery", es: "Galería de Tattoos", pt: "Galeria de Tattoos" },
+  gallery_subtitle: { en: "Ideas en tu piel", es: "Ideas en tu piel", pt: "Ideias na pele" },
   gallery_cta: { en: "Ready for your masterpiece? Book now", es: "¿Listo para tu obra maestra? Reservá ahora", pt: "Pronto para sua obra-prima? Reserve agora" },
   cat_all: { en: "All", es: "Todos", pt: "Todos" },
+  cat_fineline: { en: "Fine Line", es: "Fine Line", pt: "Fine Line" },
+  cat_botanical: { en: "Botanical & Nature", es: "Botánico y Naturaleza", pt: "Botânico e Natureza" },
   cat_portrait: { en: "Portrait", es: "Retrato", pt: "Retrato" },
   cat_realism: { en: "Realism", es: "Realismo", pt: "Realismo" },
   cat_full_sleeve: { en: "Full Sleeve", es: "Manga Completa", pt: "Manga Completa" },
   cat_custom: { en: "Custom", es: "Personalizado", pt: "Personalizado" },
 
   // Footer
-  footer_desc: { 
+  footer_desc: {
     en: "Independent visual artist and tattooer. Specializing in Fine Line and custom designs with technical precision and artistic sensitivity.",
     es: "Artista visual y tatuadora independiente. Especializada en Fine Line y diseños personalizados con precisión técnica y sensibilidad artística.",
     pt: "Artista visual e tatuadora independente. Especializada em Fine Line e desenhos personalizados com precisão técnica e sensibilidade artística."
@@ -70,7 +72,8 @@ export const translations: Translations = {
   footer_contact: { en: "Contact", es: "Contacto", pt: "Contato" },
   footer_location: { en: "Location", es: "Ubicación", pt: "Localização" },
   footer_city: { en: "Rio de Janeiro, Brasil", es: "Río de Janeiro, Brasil", pt: "Rio de Janeiro, Brasil" },
-  
+  footer_made_by: { en: "Made by", es: "Hecho por", pt: "Feito por" },
+
   // Hero Trust Indicators
   hero_custom: { en: "Fine Line Specialist", es: "Especialista en Fine Line", pt: "Especialista em Fine Line" },
   hero_precision: { en: "Visual Artist's Perspective", es: "Mirada de Artista Plástica", pt: "Olhar de Artista Plástica" },
@@ -80,12 +83,12 @@ export const translations: Translations = {
   about_label: { en: "About Me", es: "Sobre mí", pt: "Sobre mim" },
   about_title: { en: "My Vision, Your Skin", es: "Mi Mirada, Tu Piel", pt: "Meu Olhar, Sua Pele" },
   about_subtitle: { en: "Art in every stroke", es: "Arte en cada trazo", pt: "Arte em cada traço" },
-  about_desc1: { 
+  about_desc1: {
     en: "I am Coni Pérez, a visual artist and tattoo artist. My journey began among canvases and brushes, and today I bring that same sensitivity to the skin through Fine Line work. With years of experience between Argentina and Brazil, I have perfected a style that prioritizes subtlety, cleanliness, and visual harmony.",
     es: "Soy Coni Pérez, artista plástica y tatuadora. Mi camino empezó entre lienzos y pinceles, y hoy esa misma sensibilidad la llevo a la piel a través del Fine Line. Con años de trayectoria entre Argentina y Brasil, he perfeccionado un estilo que prioriza la sutileza, la limpieza y la armonía visual.",
     pt: "Sou Coni Pérez, artista plástica e tatuadora. Meu caminho começou entre telas e pincéis, e hoje levo essa mesma sensibilidade para a pele através do Fine Line. Com anos de trajetória entre a Argentina e o Brasil, aperfeiçoei um estilo que prioriza a sutileza, a limpeza e a harmonia visual."
   },
-  about_desc2: { 
+  about_desc2: {
     en: "As a professional and forensic makeup artist, I bring a unique technical precision to every design. I don't just aim to tattoo; I seek to interpret your idea with the rigor of a specialist and the soul of a visual artist.",
     es: "Como maquilladora profesional y forense, aporto una precisión técnica única a cada diseño. No solo busco tatuar; busco interpretar tu idea con el rigor de una especialista y el alma de una artista plástica.",
     pt: "Como maquiadora profissional e forense, trago uma precisão técnica única a cada desenho. Não busco apenas tatuar; busco interpretar sua ideia com o rigor de uma especialista e a alma de uma artista plástica."
@@ -120,18 +123,18 @@ export const translations: Translations = {
   value_title: { en: "The Art of Feeling Confident", es: "El Arte de Sentirse Seguro", pt: "A Arte de se Sentir Seguro" },
   value_subtitle: { en: "My experience meets your idea. Precision meets emotion.", es: "Mi experiencia se une a tu idea. La precisión se une a la emoción.", pt: "Minha experiência une-se à sua ideia. A precisão une-se à emoção." },
   value_card1_title: { en: "Technique and Artistic Sensitivity", es: "Técnica y Sensibilidad Artística", pt: "Técnica e Sensibilidade Artística" },
-  value_card1_desc: { 
-    en: "My background in visual arts and forensic makeup allows me to master anatomy and detail. I offer you an impeccable fine line and a curated aesthetic, transforming your skin into a work of art with the neatness you seek.", 
-    es: "Mi formación en artes plásticas y maquillaje forense me permite dominar la anatomía y el detalle. Te ofrezco un trazo fino impecable y una estética cuidada, transformando tu piel en una obra de arte con la prolijidad que buscás.", 
-    pt: "Minha formação em artes plásticas e maquiagem forense me permite dominar a anatomia e o detalhe. Ofereço um traço fino impecável e uma estética cuidadosa, transformando sua pele em uma obra de arte com a prolijidade que você procura." 
+  value_card1_desc: {
+    en: "My background in visual arts and forensic makeup allows me to master anatomy and detail. I offer you an impeccable fine line and a curated aesthetic, transforming your skin into a work of art with the neatness you seek.",
+    es: "Mi formación en artes plásticas y maquillaje forense me permite dominar la anatomía y el detalle. Te ofrezco un trazo fino impecable y una estética cuidada, transformando tu piel en una obra de arte con la prolijidad que buscás.",
+    pt: "Minha formação em artes plásticas e maquiagem forense me permite dominar a anatomia e o detalhe. Ofereço um traço fino impecável e uma estética cuidadosa, transformando sua pele em uma obra de arte com a prolijidade que você procura."
   },
   value_card2_title: { en: "A Close and Transparent Process", es: "Un Proceso Cercano y Transparente", pt: "Um Processo Próximo e Transparente" },
-  value_card2_desc: { 
-    en: "No surprises. From the personalized consultation to the aftercare, I maintain direct and honest communication. You are investing in a unique artist piece, created in a professional and friendly environment.", 
-    es: "Sin sorpresas. Desde la consulta personalizada hasta el cuidado posterior, mantengo una comunicación directa y honesta. Estás invirtiendo en una pieza única de autor, creada en un entorno profesional y amigable.", 
-    pt: "Sem surpresas. Da consulta personalizada aos cuidados posteriores, mantenho uma comunicação direta e honesta. Você está investindo em uma peça única de autor, criada em um ambiente profissional e amigável." 
+  value_card2_desc: {
+    en: "No surprises. From the personalized consultation to the aftercare, I maintain direct and honest communication. You are investing in a unique artist piece, created in a professional and friendly environment.",
+    es: "Sin sorpresas. Desde la consulta personalizada hasta el cuidado posterior, mantengo una comunicación directa y honesta. Estás invirtiendo en una pieza única de autor, creada en un entorno profesional y amigable.",
+    pt: "Sem surpresas. Da consulta personalizada aos cuidados posteriores, mantenho uma comunicação direta e honesta. Você está investindo em uma peça única de autor, criada em um ambiente profissional e amigável."
   },
-  
+
   faqs: {
     en: [
       { question: "What is your price range?", answer: "Each piece is a personalized investment in living art. Pricing varies by size, complexity, and session time. Quote provided during consultation." },
@@ -171,21 +174,21 @@ export const translations: Translations = {
   form_upload_title: { en: "Upload images (optional)", es: "Subir imágenes (opcional)", pt: "Carregar imagens (opcional)" },
   form_upload_label: { en: "Click to upload or drag and drop", es: "Haz clic para subir o arrastra aquí", pt: "Clique para carregar ou arraste" },
   form_uploading: { en: "Uploading to cloud...", es: "Subiendo a la nube...", pt: "Enviando para a nuvem..." },
-  form_terms: { 
-    en: "I understand this is a request and final pricing will be discussed after design approval", 
-    es: "Entiendo que esto es una solicitud y el precio final se discutirá tras la aprobación del diseño", 
-    pt: "Entendo que este é um pedido e o preço final será discutido após a aprovação do design" 
+  form_terms: {
+    en: "I understand this is a request and final pricing will be discussed after design approval",
+    es: "Entiendo que esto es una solicitud y el precio final se discutirá tras la aprobación del diseño",
+    pt: "Entendo que este é um pedido e o preço final será discutido após a aprovação do design"
   },
   form_success_thanks: { en: "Thank you!", es: "¡Gracias!", pt: "Obrigado!" },
-  form_success_desc_quick: { 
-    en: "Your consultation request has been received. We'll reach out within 24 hours.", 
-    es: "Tu solicitud de consulta ha sido recibida. Nos contactaremos en 24 horas.", 
-    pt: "Seu pedido de consulta foi recebido. Entraremos em contato em 24 horas." 
+  form_success_desc_quick: {
+    en: "Your consultation request has been received. We'll reach out within 24 hours.",
+    es: "Tu solicitud de consulta ha sido recibida. Nos contactaremos en 24 horas.",
+    pt: "Seu pedido de consulta foi recebido. Entraremos em contato em 24 horas."
   },
-  form_success_desc_full: { 
-    en: "Your booking request has been received. We'll contact you within 24 hours.", 
-    es: "Tu solicitud de reserva ha sido recibida. Nos contactaremos en 24 horas.", 
-    pt: "Seu pedido de reserva foi recebido. Entraremos em contato em 24 horas." 
+  form_success_desc_full: {
+    en: "Your booking request has been received. We'll contact you within 24 hours.",
+    es: "Tu solicitud de reserva ha sido recibida. Nos contactaremos en 24 horas.",
+    pt: "Seu pedido de reserva foi recebido. Entraremos em contato em 24 horas."
   },
   form_success_back: { en: "Back to Start", es: "Volver al Inicio", pt: "Voltar para o Início" },
   form_label_phone: { en: "Phone * (include country code)", es: "Teléfono * (incluir código de país)", pt: "Telefone * (incluir código do país)" },

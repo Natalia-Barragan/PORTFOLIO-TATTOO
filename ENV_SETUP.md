@@ -41,7 +41,7 @@ RESEND_FROM_EMAIL=reservas@tudominio.com
 ADMIN_EMAIL=admin@tudominio.com
 
 # Nombre del estudio
-STUDIO_NAME=Victor Mane Tattoo
+STUDIO_NAME=Coni Pérez Tattoo
 ```
 
 ## 🔧 Archivo .env.local
@@ -51,7 +51,7 @@ Crea un archivo `.env.local` en la raíz del proyecto con el siguiente contenido
 ```env
 # Resend Email API
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-RESEND_FROM_EMAIL=reservas@victormane.com
+RESEND_FROM_EMAIL=reservas@coniperez.com
 
 # Budibase CRM
 BUDIBASE_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -60,8 +60,8 @@ BUDIBASE_TABLE_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 BUDIBASE_URL=https://your-instance.budibase.app
 
 # Admin
-ADMIN_EMAIL=admin@victormane.com
-STUDIO_NAME=Victor Mane Tattoo
+ADMIN_EMAIL=admin@coniperez.com
+STUDIO_NAME=Coni Pérez Tattoo
 ```
 
 ## ⚠️ Seguridad
@@ -92,17 +92,17 @@ STUDIO_NAME=Victor Mane Tattoo
 ```env
 # ===== RESEND EMAIL =====
 RESEND_API_KEY=re_abc123def456ghi789jkl012mno345
-RESEND_FROM_EMAIL=reservas@victormane.com
+RESEND_FROM_EMAIL=reservas@coniperez.com
 
 # ===== BUDIBASE CRM =====
 BUDIBASE_API_KEY=abc123def456ghi789jkl012mno345pqr
 BUDIBASE_APP_ID=app_abc123def456ghi789jkl012mno345
 BUDIBASE_TABLE_ID=tbl_abc123def456ghi789jkl012mno345
-BUDIBASE_URL=https://victormane.budibase.app
+BUDIBASE_URL=https://coniperez.budibase.app
 
 # ===== ADMIN =====
-ADMIN_EMAIL=admin@victormane.com
-STUDIO_NAME=Victor Mane Tattoo
+ADMIN_EMAIL=admin@coniperez.com
+STUDIO_NAME=Coni Pérez Tattoo
 
 # ===== OPCIONAL =====
 # Para desarrollo local

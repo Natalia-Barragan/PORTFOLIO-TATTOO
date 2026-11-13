@@ -10,7 +10,7 @@ import ProcessTimeline from "@/components/process-timeline"
 import HomeCTA from "@/components/home-cta"
 import LuxuryFooter from "@/components/luxury-footer"
 import ScrollProgress from "@/components/scroll-progress"
-import Widget from "@/components/Widget"
+// import Widget from "@/components/Widget"
 
 
 

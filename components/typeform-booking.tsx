@@ -25,10 +25,10 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
   const [currentStep, setCurrentStep] = useState(0)
   const [submitted, setSubmitted] = useState(false)
 
-  // estados para controlar subida de imagen
+  // estados para controlar archivo adjunto (sin base de datos)
   const [isUploading, setIsUploading] = useState(false)
-  const [imageUrl, setImageUrl] = useState<string>("")
-  const [uploadedFiles, setUploadedFiles] = useState<{ name: string }[]>([])
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [previewUrl, setPreviewUrl] = useState<string>("")
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // estado para guardar los errores de validacion
@@ -142,48 +142,92 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
     }
   }
 
+  const handleFileSelect = (file: File) => {
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"]
+    if (!allowedTypes.includes(file.type)) {
+      setErrors({ ...errors, upload: "Solo se permiten imágenes JPG, PNG, WEBP o GIF." })
+      return
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setErrors({ ...errors, upload: "El archivo supera el máximo de 10MB." })
+      return
+    }
+    if (errors.upload) {
+      const { upload, ...rest } = errors
+      setErrors(rest)
+    }
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl)
+    }
+    setSelectedFile(file)
+    setPreviewUrl(URL.createObjectURL(file))
+  }
+
   const handleSubmit = async () => {
-    setIsUploading(true) // Bloquear botones durante el envío
+    setIsUploading(true)
     try {
       const formDataToSend = new FormData()
 
       formDataToSend.append("name", formData.name)
       formDataToSend.append("email", formData.email)
       formDataToSend.append("phone", formData.phone)
-      formDataToSend.append("contactMethod", formData.contactMethod)
+      formDataToSend.append("contactMethod", formData.contactMethod || "email")
       formDataToSend.append("vision", formData.vision)
       formDataToSend.append("size", formData.size)
       formDataToSend.append("date", formData.date)
       formDataToSend.append("budget", formData.budget)
       formDataToSend.append("terms", String(formData.terms))
 
-      if (imageUrl) {
-        formDataToSend.append("referenceImage", imageUrl)
+      if (selectedFile) {
+        formDataToSend.append("file", selectedFile)
       }
 
       const response = await fetch("/api/save-lead", {
         method: "POST",
         body: formDataToSend,
-      });
+      })
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Error al guardar el lead");
+      if (!response.ok && formData.contactMethod !== "whatsapp") {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Error al enviar la solicitud")
+      }
+
+      if (formData.contactMethod === "whatsapp") {
+        const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5492214502618").replace(/\D/g, "")
+        const lines = [
+          `Hola Coni! Quiero hacer una reserva de tatuaje:`,
+          ``,
+          `• *Nombre:* ${formData.name}`,
+          `• *Email:* ${formData.email}`,
+          `• *Teléfono:* ${formData.phone}`,
+          `• *Idea / Visión:* ${formData.vision}`,
+          formData.size ? `• *Tamaño aprox.:* ${formData.size}` : "",
+          formData.budget ? `• *Presupuesto:* ${formData.budget}` : "",
+          formData.date ? `• *Fecha estimada:* ${formData.date}` : "",
+          selectedFile ? `• *Imagen de referencia:* ${selectedFile.name} (enviada adjunta por mail)` : "",
+        ].filter(Boolean).join("\n")
+
+        const waUrl = whatsappNumber
+          ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines)}`
+          : `https://wa.me/?text=${encodeURIComponent(lines)}`
+        window.open(waUrl, "_blank", "noopener,noreferrer")
       }
 
       setSubmitted(true)
-
     } catch (error: any) {
       console.error("Submit error:", error)
       setErrors({ submit: error.message || "Error al enviar el formulario. Intentá nuevamente." })
     } finally {
       setIsUploading(false)
     }
-  };
+  }
 
   const removeFile = () => {
-    setUploadedFiles([])
-    setImageUrl("")
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl)
+    }
+    setSelectedFile(null)
+    setPreviewUrl("")
     if (errors.upload) {
       const { upload, ...rest } = errors
       setErrors(rest)
@@ -344,73 +388,51 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                 <div
                   className={`border-2 border-dashed rounded-sm p-8 text-center hover:border-gray-300 transition-colors cursor-pointer ${errors.upload ? "border-red-500" : "border-gray-300/30"}`}
                   onClick={() => !isUploading && fileInputRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault()
+                    const file = e.dataTransfer.files?.[0]
+                    if (file) handleFileSelect(file)
+                  }}
                 >
                   <input
                     ref={fileInputRef}
                     type="file"
                     accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
                     className="hidden"
-                    onChange={async (e) => {
+                    onChange={(e) => {
                       const file = e.target.files?.[0]
-                      if (!file) return
-
-                      setIsUploading(true)
-                      setUploadedFiles([])
-                      if (errors.upload) {
-                        const { upload, ...rest } = errors
-                        setErrors(rest)
-                      }
-
-                      try {
-                        const data = new FormData()
-                        data.append("file", file)
-
-                        const res = await fetch("/api/upload-image", {
-                          method: "POST",
-                          body: data,
-                        })
-
-                        const result = await res.json()
-
-                        if (!res.ok) {
-                          throw new Error(result.error || "Error al subir la imagen")
-                        }
-
-                        setImageUrl(result.url)
-                        setUploadedFiles([{ name: file.name }])
-                      } catch (err: any) {
-                        setErrors({ ...errors, upload: err.message || "Error al subir la imagen. Intentá con un archivo más pequeño." })
-                      } finally {
-                        setIsUploading(false)
-                        // Resetear input para permitir volver a elegir el mismo archivo
-                        if (fileInputRef.current) fileInputRef.current.value = ""
-                      }
+                      if (file) handleFileSelect(file)
+                      if (fileInputRef.current) fileInputRef.current.value = ""
                     }}
                   />
 
-                  {isUploading ? (
-                    <div className="text-metal-plateado animate-pulse font-medium py-4">
-                      {t("form_uploading")}
-                    </div>
-                  ) : (
-                    <>
-                      <Upload className="w-12 h-12 text-metal-plateado mx-auto mb-4" />
-                      <p className="text-white mb-2">{t("form_upload_label")}</p>
-                      <p className="text-sm text-[#D1D5DB]/70">PNG, JPG, WEBP hasta 10MB</p>
-                    </>
-                  )}
+                  <Upload className="w-12 h-12 text-metal-plateado mx-auto mb-4" />
+                  <p className="text-white mb-2">{t("form_upload_label")}</p>
+                  <p className="text-sm text-[#D1D5DB]/70">PNG, JPG, WEBP hasta 10MB</p>
                 </div>
 
                 {errors.upload && <p className="text-red-500 text-sm text-center mt-2">⚠️ {errors.upload}</p>}
 
-                {uploadedFiles.length > 0 && (
-                  <div className="space-y-2">
+                {selectedFile && (
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between bg-[#2A2A2A] p-3 rounded-sm border border-green-500/30">
-                      <span className="text-white text-sm truncate flex items-center gap-2">
-                        <Check className="w-4 h-4 text-green-500" />
-                        {uploadedFiles[0].name}
+                      <span className="text-white text-sm truncate flex items-center gap-3">
+                        {previewUrl && (
+                          <img
+                            src={previewUrl}
+                            alt="Vista previa"
+                            className="w-12 h-12 object-cover rounded border border-white/20"
+                          />
+                        )}
+                        <Check className="w-4 h-4 text-green-500 shrink-0" />
+                        <span className="truncate">{selectedFile.name}</span>
                       </span>
-                      <button onClick={removeFile} className="text-metal-plateado hover:text-white transition-colors">
+                      <button
+                        type="button"
+                        onClick={removeFile}
+                        className="text-metal-plateado hover:text-white transition-colors"
+                      >
                         <X className="w-5 h-5" />
                       </button>
                     </div>
@@ -442,20 +464,6 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                     </SelectContent>
                   </Select>
                   {errors.size && <p className="text-red-500 text-sm mt-2">{errors.size}</p>}
-                </div>
-                <div>
-                  <Label className="text-white mb-2 block font-heading">{t("form_label_budget")}</Label>
-                  <Select value={formData.budget} onValueChange={(val) => setFormData({ ...formData, budget: val })}>
-                    <SelectTrigger className="bg-[#2A2A2A] border-gray-300/30 text-white text-xl py-6">
-                      <SelectValue placeholder={t("form_budget_select")} />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="500-1000">$500 - $1,000</SelectItem>
-                      <SelectItem value="1000-2500">$1,000 - $2,500</SelectItem>
-                      <SelectItem value="2500-5000">$2,500 - $5,000</SelectItem>
-                      <SelectItem value="5000+">$5,000+</SelectItem>
-                    </SelectContent>
-                  </Select>
                 </div>
               </div>
             )}

@@ -40,11 +40,11 @@ export default function LuxuryFooter() {
             <h4 className="font-heading text-xl text-white mb-6 font-light">{t("footer_contact")}</h4>
             <div className="space-y-4">
               <a
-                href="mailto:hola@coniperez.com"
+                href="mailto:soyconiperez@gmail.com"
                 className="flex items-center gap-3 text-[#D1D5DB] hover:text-metal-plateado transition-colors"
               >
                 <Mail className="w-5 h-5" />
-                hola@coniperez.com
+                soyconiperez@gmail.com
               </a>
               <div className="flex items-center gap-3 text-[#D1D5DB]">
                 <MapPin className="w-5 h-5" />
@@ -75,12 +75,12 @@ export default function LuxuryFooter() {
         <div className="pt-8 border-t border-gray-300/20 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-[#D1D5DB]/70">
           <p>
             © 2025 Coni Perez Tattoo.
-            <span className="mx-1">Made by</span>
+            <span className="mx-1">{t("footer_made_by")}</span>
             <a
               href={`https://nbdigital.lat`}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-metal-plateado transition-colors"
+              className="font-semibold text-white/90 hover:text-[#d4a574] hover:drop-shadow-[0_0_10px_rgba(212,165,116,0.8)] underline-offset-4 hover:underline transition-all duration-300"
             >
               NB DIGITAL
             </a>.

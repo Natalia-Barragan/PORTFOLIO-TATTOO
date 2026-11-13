@@ -7,7 +7,7 @@ Visualización de la estructura del proyecto después de implementar el módulo 
 ## 🎯 Estructura Completa
 
 ```
-victor-mane-tattoo/
+tattoo-coni-perez/
 │
 ├── 📂 app/
 │   ├── 📂 api/
@@ -292,7 +292,7 @@ BUDIBASE_URL=https://xxxxx.budibase.app
 
 # Admin
 ADMIN_EMAIL=admin@tudominio.com
-STUDIO_NAME=Victor Mane Tattoo
+STUDIO_NAME=Coni Pérez Tattoo
 ```
 
 ---

@@ -24,6 +24,7 @@ interface EmailTemplateProps {
   date: string;
   contactMethod: string;
   imageUrl?: string;
+  attachmentName?: string;
   type?: 'client' | 'artist';
 }
 
@@ -37,6 +38,7 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
   date,
   contactMethod,
   imageUrl,
+  attachmentName,
   type = 'client',
 }) => {
   const isArtist = type === 'artist';
@@ -135,11 +137,6 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
                   </div>
 
                   <div>
-                    <Text className="text-gray-500 text-xs uppercase font-bold m-0 mb-1">Estimated Budget</Text>
-                    <Text className="text-white text-base m-0">{budget}</Text>
-                  </div>
-
-                  <div>
                     <Text className="text-gray-500 text-xs uppercase font-bold m-0 mb-1">Preferred Date</Text>
                     <Text className="text-white text-base m-0">{date}</Text>
                   </div>
@@ -173,6 +170,15 @@ export const EmailTemplate: React.FC<EmailTemplateProps> = ({
                           Open full size image
                         </Link>
                       </div>
+                    </div>
+                  ) : attachmentName ? (
+                    <div className="pt-4 mt-4 border-t border-[#333333]">
+                      <Text className="text-gray-500 text-xs uppercase font-bold m-0 mb-1">
+                        Reference Image
+                      </Text>
+                      <Text className="text-white text-sm m-0">
+                        📎 Attached to this email: {attachmentName}
+                      </Text>
                     </div>
                   ) : (
                     <div className="pt-2 mt-2 border-t border-[#333333]">

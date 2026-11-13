@@ -28,7 +28,7 @@ BUDIBASE_TABLE_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 BUDIBASE_URL=https://your-instance.budibase.app
 RESEND_FROM_EMAIL=reservas@tudominio.com
 ADMIN_EMAIL=admin@tudominio.com
-STUDIO_NAME=Victor Mane Tattoo
+STUDIO_NAME=Coni Pérez Tattoo
 ```
 
 ✅ **Verificar:** Reinicia dev server con `npm run dev`

@@ -265,7 +265,7 @@ BUDIBASE_TABLE_ID=xxxxx
 BUDIBASE_URL=https://xxxxx.budibase.app
 RESEND_FROM_EMAIL=reservas@tudominio.com
 ADMIN_EMAIL=admin@tudominio.com
-STUDIO_NAME=Victor Mane Tattoo
+STUDIO_NAME=Coni Pérez Tattoo
 ```
 
 ---

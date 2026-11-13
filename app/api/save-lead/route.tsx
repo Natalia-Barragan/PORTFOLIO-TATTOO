@@ -1,13 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import EmailTemplate from "../../../templates-emails/booking-email";
-import { createClient } from "@supabase/supabase-js";
-
-// Cliente con service role key para bypass de RLS en el servidor
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -23,21 +16,43 @@ interface LeadData {
   contactMethod?: string;
   date?: string;
   terms?: boolean;
-  imageUrl?: string;
 }
 
 export async function POST(request: NextRequest) {
   try {
     let body: LeadData;
+    let attachment: { filename: string; content: Buffer } | undefined;
 
-    // 1. PROCESAR DATOS
+    // 1. PROCESAR DATOS (sin guardar en base de datos)
     const contentType = request.headers.get("content-type") || "";
 
     if (contentType.includes("multipart/form-data")) {
       const formData = await request.formData();
+      const file = formData.get("file") as File | null;
 
-      // Recuperamos la URL de ImageKit
-      const referenceImage = formData.get("referenceImage") as string;
+      if (file && file.size > 0) {
+        const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp", "image/gif"];
+        if (!allowedTypes.includes(file.type)) {
+          return NextResponse.json(
+            { error: "Tipo de archivo no permitido. Solo JPG, PNG, WEBP o GIF." },
+            { status: 400 }
+          );
+        }
+
+        const maxSize = 10 * 1024 * 1024; // 10MB
+        if (file.size > maxSize) {
+          return NextResponse.json(
+            { error: "El archivo es demasiado grande. Máximo 10MB." },
+            { status: 400 }
+          );
+        }
+
+        const arrayBuffer = await file.arrayBuffer();
+        attachment = {
+          filename: file.name || "referencia.jpg",
+          content: Buffer.from(arrayBuffer),
+        };
+      }
 
       body = {
         name: formData.get("name") as string,
@@ -49,14 +64,11 @@ export async function POST(request: NextRequest) {
         contactMethod: formData.get("contactMethod") as string,
         date: formData.get("date") as string,
         terms: formData.get("terms") === "true",
-        imageUrl: referenceImage || undefined,
       };
-
     } else {
       body = await request.json();
     }
 
-    // Compatibilidad con versiones anteriores del formulario
     if (!body.vision) {
       body.vision = (body as any).message || (body as any).tattooType || "";
     }
@@ -68,35 +80,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 2. GUARDAR EN SUPABASE
-    const { data: dbData, error: dbError } = await supabase
-      .from('leads')
-      .insert([
-        {
-          name: body.name,
-          email: body.email,
-          phone: body.phone,
-          contact_method: body.contactMethod || "Email",
-          vision: body.vision,
-          size: body.size || "No especificado",
-          budget: body.budget || "No especificado",
-          date: body.date || "No especificada",
-          terms: body.terms,
-          image_url: body.imageUrl || null,
-          status: 'new'
-        }
-      ])
-      .select();
-
-    if (dbError) {
-      console.error("Error inserting into Supabase:", dbError);
-      return NextResponse.json(
-        { error: "Error al guardar en la base de datos", details: dbError.message },
-        { status: 500 }
-      );
-    }
-
-    // 3. ENVIAR EMAILS (con fallbacks para evitar errores de tipo)
+    // 2. ENVIAR EMAILS CON ADJUNTO DIRECTO (sin base de datos)
     const emailData = {
       name: body.name,
       email: body.email,
@@ -106,38 +90,45 @@ export async function POST(request: NextRequest) {
       budget: body.budget || "No especificado",
       date: body.date || "No especificada",
       contactMethod: body.contactMethod || "Email",
-      imageUrl: body.imageUrl,
+      attachmentName: attachment?.filename,
     };
 
-    await Promise.all([
-      // Mail al Tatuador
-      resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL || "reservas@coniperez.com",
-        to: ARTIST_EMAIL,
-        subject: `🔥 NEW LEAD: ${body.name}`,
-        react: <EmailTemplate
-          {...emailData}
-          type="artist"
-        />,
-      }),
+    const fromAddress = process.env.RESEND_FROM_EMAIL || "reservas@coniperez.com";
 
-      // Mail al Cliente 
-      resend.emails.send({
-        from: process.env.RESEND_FROM_EMAIL || "reservas@coniperez.com",
+    // Mail al Tatuador (con la foto adjunta si existe)
+    const artistMailResult = await resend.emails.send({
+      from: fromAddress,
+      to: ARTIST_EMAIL,
+      replyTo: body.email,
+      subject: `🔥 Nueva Reserva: ${body.name}`,
+      attachments: attachment ? [attachment] : undefined,
+      react: <EmailTemplate {...emailData} type="artist" />,
+    });
+
+    if (artistMailResult.error) {
+      console.error("Error enviando mail al artista:", artistMailResult.error);
+      return NextResponse.json(
+        { error: "No se pudo enviar el correo", details: artistMailResult.error.message },
+        { status: 500 }
+      );
+    }
+
+    // Mail de confirmación al Cliente (no bloqueante si se usa dominio de prueba de Resend)
+    try {
+      await resend.emails.send({
+        from: fromAddress,
         to: body.email,
         subject: `Booking Received - Coni Pérez`,
-        react: <EmailTemplate
-          {...emailData}
-          type="client"
-        />,
-      })
-    ]);
+        react: <EmailTemplate {...emailData} type="client" />,
+      });
+    } catch (clientMailErr) {
+      console.warn("Aviso: no se pudo enviar copia al cliente:", clientMailErr);
+    }
 
     return NextResponse.json(
-      { success: true, message: "Enviado con éxito", data: body, dbData },
+      { success: true, message: "Enviado con éxito", data: body },
       { status: 200 }
     );
-
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json(
