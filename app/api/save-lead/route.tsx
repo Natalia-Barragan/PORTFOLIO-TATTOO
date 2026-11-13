@@ -73,7 +73,7 @@ export async function POST(request: NextRequest) {
       body.vision = (body as any).message || (body as any).tattooType || "";
     }
 
-    if (!body.name || !body.email || !body.phone || !body.vision || !body.terms) {
+    if (!body.name || !body.email || !body.vision) {
       return NextResponse.json(
         { error: "Faltan campos requeridos (nombre, email, teléfono, visión o términos)." },
         { status: 400 }

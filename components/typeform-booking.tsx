@@ -87,6 +87,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
         isValid = false
       }
 
+      /* Validación de teléfono comentada mientras se envía directo por WhatsApp
       const phoneRegex = /^\+[0-9]{10,15}$/
       if (!formData.phone) {
         newErrors.phone = t("form_error_phone")
@@ -95,6 +96,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
         newErrors.phone = t("form_error_phone")
         isValid = false
       }
+      */
     }
 
     if (currentStepId === "vision") {
@@ -116,10 +118,12 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
         newErrors.date = t("form_error_date") || "Por favor indica una fecha aproximada"
         isValid = false
       }
+      /* Términos de precio comentados por ahora
       if (!formData.terms) {
         newErrors.terms = t("form_error_terms") || "Debes aceptar los términos y condiciones"
         isValid = false
       }
+      */
     }
 
     setErrors(newErrors)
@@ -188,7 +192,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
         ``,
         `• *Nombre:* ${formData.name}`,
         `• *Email:* ${formData.email}`,
-        `• *Teléfono:* ${formData.phone}`,
+        // formData.phone ? `• *Teléfono:* ${formData.phone}` : "",
         `• *Idea / Visión:* ${formData.vision}`,
         formData.size ? `• *Tamaño aprox.:* ${formData.size}` : "",
         formData.date ? `• *Fecha estimada:* ${formData.date}` : "",
@@ -326,6 +330,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                   />
                   {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
                 </div>
+                {/* Campo de teléfono comentado mientras se envía directo por WhatsApp
                 <div>
                   <Label className="text-white mb-2 block font-heading">{t("form_label_phone")}</Label>
                   <Input
@@ -340,6 +345,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                   />
                   {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                 </div>
+                */}
                 {/* Opción de método de contacto comentada por ahora (envío directo por WhatsApp)
                 <div>
                   <Label className="text-white mb-2 block font-heading">{t("form_label_contact")}</Label>
@@ -451,11 +457,11 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                       <SelectValue placeholder={t("form_size_select")} />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="small">Small (5-10 cm)</SelectItem>
-                      <SelectItem value="medium">Medium (10-20 cm)</SelectItem>
-                      <SelectItem value="large">Large (20-30 cm)</SelectItem>
-                      <SelectItem value="xlarge">Extra Large (30+ cm)</SelectItem>
-                      <SelectItem value="sleeve">Full sleeve/back</SelectItem>
+                      <SelectItem value={t("form_size_small")}>{t("form_size_small")}</SelectItem>
+                      <SelectItem value={t("form_size_medium")}>{t("form_size_medium")}</SelectItem>
+                      <SelectItem value={t("form_size_large")}>{t("form_size_large")}</SelectItem>
+                      <SelectItem value={t("form_size_xlarge")}>{t("form_size_xlarge")}</SelectItem>
+                      <SelectItem value={t("form_size_sleeve")}>{t("form_size_sleeve")}</SelectItem>
                     </SelectContent>
                   </Select>
                   {errors.size && <p className="text-red-500 text-sm mt-2">{errors.size}</p>}
@@ -479,6 +485,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                   {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>}
                 </div>
 
+                {/* Checkbox de aviso de precio comentado por ahora
                 {currentStep === steps.length - 1 && (
                   <div className="space-y-3 pt-4">
                     <div className="flex items-start space-x-3">
@@ -498,6 +505,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                     {errors.terms && <p className="text-red-500 text-sm">{errors.terms}</p>}
                   </div>
                 )}
+                */}
               </div>
             )}
 
