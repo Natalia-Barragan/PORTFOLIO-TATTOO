@@ -38,7 +38,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
     name: "",
     email: "",
     phone: "",
-    contactMethod: "",
+    contactMethod: "whatsapp",
     vision: "",
     size: "",
     date: "",
@@ -182,36 +182,29 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
         formDataToSend.append("file", selectedFile)
       }
 
-      const response = await fetch("/api/save-lead", {
+      const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5492214502618").replace(/\D/g, "")
+      const lines = [
+        `Hola Coni! Quiero hacer una reserva de tatuaje:`,
+        ``,
+        `• *Nombre:* ${formData.name}`,
+        `• *Email:* ${formData.email}`,
+        `• *Teléfono:* ${formData.phone}`,
+        `• *Idea / Visión:* ${formData.vision}`,
+        formData.size ? `• *Tamaño aprox.:* ${formData.size}` : "",
+        formData.date ? `• *Fecha estimada:* ${formData.date}` : "",
+        selectedFile ? `• *Imagen de referencia:* ${selectedFile.name}` : "",
+      ].filter(Boolean).join("\n")
+
+      const waUrl = whatsappNumber
+        ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines)}`
+        : `https://wa.me/?text=${encodeURIComponent(lines)}`
+      window.open(waUrl, "_blank", "noopener,noreferrer")
+
+      // Envío opcional en segundo plano al mail por si hay foto adjunta (no bloquea el flujo)
+      fetch("/api/save-lead", {
         method: "POST",
         body: formDataToSend,
-      })
-
-      if (!response.ok && formData.contactMethod !== "whatsapp") {
-        const errorData = await response.json()
-        throw new Error(errorData.error || "Error al enviar la solicitud")
-      }
-
-      if (formData.contactMethod === "whatsapp") {
-        const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5492214502618").replace(/\D/g, "")
-        const lines = [
-          `Hola Coni! Quiero hacer una reserva de tatuaje:`,
-          ``,
-          `• *Nombre:* ${formData.name}`,
-          `• *Email:* ${formData.email}`,
-          `• *Teléfono:* ${formData.phone}`,
-          `• *Idea / Visión:* ${formData.vision}`,
-          formData.size ? `• *Tamaño aprox.:* ${formData.size}` : "",
-          formData.budget ? `• *Presupuesto:* ${formData.budget}` : "",
-          formData.date ? `• *Fecha estimada:* ${formData.date}` : "",
-          selectedFile ? `• *Imagen de referencia:* ${selectedFile.name} (enviada adjunta por mail)` : "",
-        ].filter(Boolean).join("\n")
-
-        const waUrl = whatsappNumber
-          ? `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lines)}`
-          : `https://wa.me/?text=${encodeURIComponent(lines)}`
-        window.open(waUrl, "_blank", "noopener,noreferrer")
-      }
+      }).catch(() => {})
 
       setSubmitted(true)
     } catch (error: any) {
@@ -347,6 +340,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                   />
                   {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
                 </div>
+                {/* Opción de método de contacto comentada por ahora (envío directo por WhatsApp)
                 <div>
                   <Label className="text-white mb-2 block font-heading">{t("form_label_contact")}</Label>
                   <Select
@@ -362,6 +356,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
                     </SelectContent>
                   </Select>
                 </div>
+                */}
               </div>
             )}
 
