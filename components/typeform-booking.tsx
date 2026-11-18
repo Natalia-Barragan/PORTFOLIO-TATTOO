@@ -214,7 +214,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
         formDataToSend.append("referenceImage", imageUrl)
       }
 
-      const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5492214502618").replace(/\D/g, "")
+      const whatsappNumber = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "5492214202618").replace(/\D/g, "")
       const lines = [
         `Hola Coni! Quiero hacer una reserva de tatuaje:`,
         ``,
@@ -236,7 +236,7 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
       fetch("/api/save-lead", {
         method: "POST",
         body: formDataToSend,
-      }).catch(() => {})
+      }).catch(() => { })
 
       setSubmitted(true)
     } catch (error: any) {
