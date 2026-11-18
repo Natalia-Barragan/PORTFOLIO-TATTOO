@@ -165,7 +165,7 @@ export const translations: Translations = {
   form_placeholder_name: { en: "Enter your full name", es: "Ingresa tu nombre completo", pt: "Digite seu nome completo" },
   form_placeholder_email: { en: "you@example.com", es: "tu@ejemplo.com", pt: "voce@exemplo.com" },
   form_placeholder_phone: { en: "+1 234 567 8900", es: "+54 9 11 ...", pt: "+55 ..." },
-  form_placeholder_vision: { en: "Tell us about the tattoo you're imagining...", es: "Contame sobre el tatuaje que estás imaginando...", pt: "Conte-me sobre a tatuagem que você está imaginando..." },
+  form_placeholder_vision: { en: "Tell me what tattoo you're thinking of...", es: "Contame qué tatuaje estás pensando...", pt: "Conte-me que tatuagem você está pensando..." },
   form_placeholder_date: { en: "e.g., March 2025 or flexible", es: "ej. Marzo 2025 o flexible", pt: "ex. Março 2025 ou flexível" },
   form_error_name: { en: "Name is required", es: "El nombre es obligatorio", pt: "O nome é obrigatório" },
   form_error_email: { en: "Please enter a valid email", es: "Por favor ingresa un email válido", pt: "Por favor, insira un email válido" },
@@ -229,7 +229,7 @@ export const translations: Translations = {
   // Steps Titles
   step_title_name: { en: "What's your name?", es: "¿Cómo te llamas?", pt: "Qual o seu nome?" },
   step_title_contact: { en: "How can we contact you?", es: "¿Cómo podemos contactarte?", pt: "Como podemos entrar em contato?" },
-  step_title_vision: { en: "Describe your vision", es: "Describí tu visión", pt: "Descreva sua visão" },
+  step_title_vision: { en: "Describe your tattoo", es: "Describí tu tattoo", pt: "Descreva sua tattoo" },
   step_title_vision_quick: { en: "Tell us about your tattoo idea", es: "Contanos tu idea de tatuaje", pt: "Conte-nos sobre sua ideia de tatuagem" },
   step_title_upload: { en: "Reference images?", es: "¿Tenés fotos de referencia?", pt: "Imagens de referência?" },
   step_title_details: { en: "Tell us more details", es: "Contanos más detalles", pt: "Conte-nos mais detalhes" },
