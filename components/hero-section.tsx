@@ -102,7 +102,7 @@ export default function HeroSection() {
 
         {/* Trust Indicators - Mobile Carousel */}
         <motion.div
-          className="mt-20 flex md:hidden flex-col items-center justify-center gap-2.5"
+          className="mt-32 flex md:hidden flex-col items-center justify-center gap-2.5"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}

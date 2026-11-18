@@ -232,11 +232,11 @@ export default function TypeformBooking({ isQuickConsultation, onBack }: Typefor
         : `https://wa.me/?text=${encodeURIComponent(lines)}`
       window.open(waUrl, "_blank", "noopener,noreferrer")
 
-      // Envío opcional en segundo plano al mail por si hay foto adjunta (no bloquea el flujo)
-      fetch("/api/save-lead", {
-        method: "POST",
-        body: formDataToSend,
-      }).catch(() => { })
+      // Envío por mail comentado hasta que se vuelva a habilitar la opción de correo
+      // fetch("/api/save-lead", {
+      //   method: "POST",
+      //   body: formDataToSend,
+      // }).catch(() => { })
 
       setSubmitted(true)
     } catch (error: any) {
