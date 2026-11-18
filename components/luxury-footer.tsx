@@ -80,7 +80,7 @@ export default function LuxuryFooter() {
               href={`https://nbdigital.lat`}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-white/90 hover:text-[#d4a574] hover:drop-shadow-[0_0_10px_rgba(212,165,116,0.8)] underline-offset-4 hover:underline transition-all duration-300"
+              className="font-semibold text-white/85 hover:text-white hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.45)] underline-offset-4 hover:underline transition-all duration-300"
             >
               NB DIGITAL
             </a>.

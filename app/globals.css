@@ -174,6 +174,26 @@
     color: #333333;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   }
+
+  /* OPCIÓN 3 GUARDADA: Cristal Minimalista "Fine Line"
+  .bg-metal-plateado {
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.05) 100%);
+    background-color: rgba(15, 15, 15, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    color: #ffffff !important;
+    text-shadow: none;
+  }
+  .bg-metal-plateado:hover {
+    background-image: none;
+    background-color: #ffffff !important;
+    border-color: #ffffff;
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.35);
+    color: #000000 !important;
+  }
+  */
   .text-metal-plateado {
     background-image: linear-gradient(135deg, #ffffff 0%, #e0e0e0 20%, #a0a0a0 50%, #e0e0e0 80%, #ffffff 100%);
     background-clip: text;
@@ -198,3 +218,118 @@
     transform: rotateY(180deg);
   }
 }
+
+/* =========================================================
+   MODO CLARO (Light Mode - Gris Claro Neutro)
+   ========================================================= */
+html.light-mode {
+  --background: #ECEEF1;
+  --foreground: #141413;
+  --card: #F8F9FA;
+  --card-foreground: #141413;
+  --popover: #F8F9FA;
+  --popover-foreground: #141413;
+  --muted: #E2E5E9;
+  --muted-foreground: #4B5563;
+  --border: #CFD4DC;
+  --input: #E2E5E9;
+}
+
+html.light-mode body,
+html.light-mode main {
+  background-color: #ECEEF1 !important;
+  color: #141413 !important;
+}
+
+/* Navbar y switches superiores en Modo Claro */
+html.light-mode nav {
+  background-color: rgba(236, 238, 241, 0.88) !important;
+  border-color: rgba(20, 20, 19, 0.14) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light-mode .theme-switch-btn,
+html.light-mode .lang-switch-btn {
+  background-color: rgba(236, 238, 241, 0.9) !important;
+  border-color: rgba(20, 20, 19, 0.2) !important;
+  color: #141413 !important;
+}
+
+html.light-mode .lang-switch-text {
+  color: #141413 !important;
+}
+
+html.light-mode .lang-dropdown {
+  background-color: #F8F9FA !important;
+  border-color: rgba(20, 20, 19, 0.14) !important;
+}
+
+/* Fondos de secciones, tarjetas, modales y formulario (excluyendo el Hero y Lightbox) */
+html.light-mode .bg-black:not(.hero-keep-dark):not(.hero-keep-dark *):not(.keep-dark):not(.keep-dark *) {
+  background-color: #ECEEF1 !important;
+}
+
+html.light-mode .bg-\[\#0a0a0a\]:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .bg-\[\#0a0a0a\]\/95:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .bg-\[\#0D0D0D\]:not(.hero-keep-dark *):not(.keep-dark *) {
+  background-color: #F8F9FA !important;
+}
+
+html.light-mode .bg-\[\#1A1A1A\]:not(.hero-keep-dark *):not(.keep-dark *) {
+  background-color: #E2E5E9 !important;
+}
+
+html.light-mode .bg-\[\#2A2A2A\]:not(.hero-keep-dark *):not(.keep-dark *) {
+  background-color: #F3F4F6 !important;
+}
+
+html.light-mode .bg-linear-to-b:not(.hero-keep-dark):not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .bg-linear-to-br:not(.hero-keep-dark):not(.hero-keep-dark *):not(.keep-dark *) {
+  background-image: linear-gradient(to bottom, #ECEEF1, #DFE3E8) !important;
+}
+
+/* Textos para lectura perfecta en Modo Claro (excluyendo el Hero y Lightbox) */
+html.light-mode .text-white:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-white\/95:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-white\/90:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-white\/85:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-white\/80:not(.hero-keep-dark *):not(.keep-dark *) {
+  color: #141413 !important;
+}
+
+html.light-mode .text-white\/60:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-white\/20:not(.hero-keep-dark *):not(.keep-dark *) {
+  color: #52525B !important;
+}
+
+html.light-mode .text-\[\#D1D5DB\]:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-\[\#D1D5DB\]\/80:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-\[\#D1D5DB\]\/70:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-gray-300:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-\[\#9CA3AF\]:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .text-gray-500:not(.hero-keep-dark *):not(.keep-dark *) {
+  color: #3F3F46 !important;
+}
+
+html.light-mode .text-metal-plateado:not(.hero-keep-dark *):not(.keep-dark *) {
+  background-image: linear-gradient(135deg, #141413 0%, #3F3F46 50%, #18181B 100%) !important;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: #18181B !important;
+}
+
+html.light-mode input::placeholder,
+html.light-mode textarea::placeholder {
+  color: #71717A !important;
+}
+
+/* Bordes y sombras suaves en Modo Claro */
+html.light-mode .border-white\/10:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .border-white\/15:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .border-white\/20:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .border-gray-300\/10:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .border-gray-300\/20:not(.hero-keep-dark *):not(.keep-dark *),
+html.light-mode .border-gray-300\/30:not(.hero-keep-dark *):not(.keep-dark *) {
+  border-color: rgba(20, 20, 19, 0.15) !important;
+}
+

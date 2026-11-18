@@ -88,7 +88,7 @@ export default function AboutMe() {
               <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent pointer-events-none z-10" />
               
               {/* Image Indicators */}
-              <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+              <div className="keep-dark absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-20">
                 {images.map((_, i) => (
                   <button
                     key={i}

@@ -25,7 +25,7 @@ export default function HeroSection() {
   }, [])
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+    <section className="hero-keep-dark relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
       {/* Imagen de fondo: playa.jpeg más nítida y luminosa */}
       <div className="absolute inset-0 z-0">
         <Image
