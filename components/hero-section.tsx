@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
 import { Feather, Palette, Globe } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -8,6 +9,20 @@ import { useLanguage } from "@/lib/i18n"
 
 export default function HeroSection() {
   const { t } = useLanguage()
+  const [activeIndicator, setActiveIndicator] = useState(0)
+
+  const indicators = [
+    { icon: Feather, label: t("hero_custom") },
+    { icon: Palette, label: t("hero_precision") },
+    { icon: Globe, label: t("hero_studio") },
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndicator((prev) => (prev + 1) % 3)
+    }, 1800)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
@@ -85,9 +100,47 @@ export default function HeroSection() {
           </Link>
         </motion.div> */}
 
-        {/* Trust Indicators */}
+        {/* Trust Indicators - Mobile Carousel */}
         <motion.div
-          className="mt-20 inline-flex flex-wrap items-center justify-center gap-4 md:gap-8 text-sm text-white font-medium tracking-widest uppercase bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/15 shadow-lg"
+          className="mt-20 flex md:hidden flex-col items-center justify-center gap-2.5"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <div className="relative overflow-hidden bg-black/45 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/15 shadow-lg min-w-[270px] flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={activeIndicator}
+                initial={{ opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -24 }}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+                className="flex items-center justify-center gap-2 text-xs text-white font-medium tracking-widest uppercase whitespace-nowrap"
+              >
+                {(() => {
+                  const Icon = indicators[activeIndicator].icon
+                  return <Icon className="w-3.5 h-3.5 shrink-0" />
+                })()}
+                {indicators[activeIndicator].label}
+              </motion.span>
+            </AnimatePresence>
+          </div>
+
+          <div className="flex items-center gap-1.5">
+            {indicators.map((_, idx) => (
+              <span
+                key={idx}
+                className={`h-1 rounded-full transition-all duration-300 ${
+                  idx === activeIndicator ? "w-4 bg-white/90" : "w-1.5 bg-white/35"
+                }`}
+              />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Trust Indicators - Desktop */}
+        <motion.div
+          className="mt-20 hidden md:inline-flex flex-wrap items-center justify-center gap-4 md:gap-8 text-sm text-white font-medium tracking-widest uppercase bg-black/40 backdrop-blur-md px-6 py-3 rounded-full border border-white/15 shadow-lg"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.5 }}
