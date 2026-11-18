@@ -11,9 +11,9 @@ export default function BackToTopArrow() {
     <button
       onClick={scrollToTop}
       aria-label="Volver al inicio"
-      className="absolute top-4 right-6 mr-5 flex items-center gap-1 text-gray-500 hover:text-metal-plateado transition-colors duration-200 group"
+      className="absolute top-4 right-5 md:right-6 md:mr-5 flex items-center gap-1 text-gray-500 hover:text-metal-plateado transition-colors duration-200 group z-20"
     >
-      <ArrowUp className="w-7 h-7 transition-transform duration-200 group-hover:-translate-y-0.5 mt-20" />
+      <ArrowUp className="w-6 h-6 md:w-7 md:h-7 transition-transform duration-200 group-hover:-translate-y-0.5 md:mt-20" />
     </button>
   )
 }
